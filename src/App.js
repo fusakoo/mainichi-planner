@@ -1,5 +1,6 @@
 import React from 'react';
 import Calendar from './components/Calendar';
+import Navigation from './components/Navigation';
 import './App.css';
 
 class App extends React.Component {
@@ -13,10 +14,10 @@ class App extends React.Component {
               Mainichi Planner
             </span>
           </div>
-          
+          <Navigation/>
         </header>
         <main>
-          <Calendar />
+          <Calendar/>
         </main>
       </div>
     );
