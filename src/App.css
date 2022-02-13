@@ -67,7 +67,6 @@ header {
   }
 }
 
-
 header #logo {
   font-size: 175%;
   /* text-align: left; */
@@ -175,6 +174,22 @@ main {
 
 
 /* CALENDAR */
+
+.select-today {
+  cursor: pointer;
+  background-color: var(--neutral-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+}
 
 .calendar {
   display: block;

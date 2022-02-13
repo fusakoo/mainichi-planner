@@ -110,13 +110,26 @@ class Calendar extends React.Component {
     });
   }
 
+  selectToday =() => {
+    this.setState({
+      selectedDate: new Date()
+    });
+  }
+
   render () {
     return (
-      <div className='calendar'>
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
-      </div>
+      <>
+        <div className='calendar-container'>
+          <div>
+            <button className='select-today' onClick={this.selectToday}>Today</button>
+          </div>
+          <div className='calendar'>
+            {this.renderHeader()}
+            {this.renderDays()}
+            {this.renderCells()}
+          </div>
+        </div>
+      </>
     )
   }
 }

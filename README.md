@@ -5,7 +5,7 @@ This is the individual project created as part of CS361 - Software Engineering I
 ---
 ## Packages
 * [date-fns](https://github.com/date-fns/date-fns)
-
+* [react-confirm-alert](https://www.npmjs.com/package/react-confirm-alert)
 ---
 
 ## Credits

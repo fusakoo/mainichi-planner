@@ -1,20 +1,21 @@
 import React from 'react';
 import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class Setting extends React.Component {
-  // const location = useLocation();
-  submit = () => {
+  submit = (e) => {
+    e.preventDefault();
     confirmAlert({
       title: 'Confirm to submit',
-      message: 'Are you sure to do this.',
+      message: 'Would you like to apply the settings?',
       buttons: [
         {
           label: 'Yes',
-          onClick: () => alert('Click Yes')
+          onClick: () => alert('Settings applied.')
         },
         {
           label: 'No',
-          onClick: () => alert('Click No')
+          onClick: () => alert('Settings not applied.')
         }
       ]
     });
@@ -25,7 +26,7 @@ class Setting extends React.Component {
       <>
         <div className='content'>
           <h1 className='page-header'>Setting</h1>
-          <form>
+          <form onSubmit={this.submit}>
             <h2 className='section-header'>General Setting</h2>
             <label>Font Size: </label>
             <select id='font-size' name='font' defaultValue='medium'>
@@ -63,7 +64,7 @@ class Setting extends React.Component {
               <input type='radio' name='theme' id='themeC' value='themeC'></input>
               <label htmlFor='themeC'>Theme C</label>            
             </div>
-            <input type="submit" value="Submit" className='submit-button' onClick={this.submit}/>
+            <input type="submit" value="Submit" className='submit-button'/>
           </form>
           <hr/>
           <form id='import-export'>
