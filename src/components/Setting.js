@@ -29,7 +29,7 @@ class Setting extends React.Component {
           <form onSubmit={this.submit}>
             <h2 className='section-header'>General Setting</h2>
             <label>Font Size: </label>
-            <select id='font-size' name='font' defaultValue='medium'>
+            <select id='font-size' name='font-size' defaultValue='medium'>
               <option value='small'>Small</option>
               <option value='medium'>Medium (Default)</option>
               <option value='large'>Large</option>
@@ -40,12 +40,19 @@ class Setting extends React.Component {
               <option value='monday'>Monday</option>
             </select>
             <label>Date highlight color: </label>
-            <select id='font-size' name='fonts' defaultValue='default'>
+            <select id='highlight' name='highlight' defaultValue='default'>
               <option value='default'>Default</option>
               <option value='red'>Red</option>
               <option value='blue'>Blue</option>
               <option value='green'>Green</option>
               <option value='black'>Black</option>
+            </select>
+            <label>Timezone (Microservice feature): </label>
+            <select id='timezone' name='timezone' defaultValue='utc-8'>
+              <option value='utc-8'>UTC-08:00</option>
+              <option value='utc-6'>UTC-06:00</option>
+              <option value='utc-5'>UTC-05:00</option>
+              <option value='utc+9'>UTC+09:00</option>
             </select>
             <h2 className='section-header'>Theme</h2>
             <div className='radio-button'>

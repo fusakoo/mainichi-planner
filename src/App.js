@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Help from './components/Help';
 import Setting from './components/Setting';
 import ChangeLog from './components/ChangeLog';
+import Day from './components/Day';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -17,14 +18,29 @@ class App extends React.Component {
     super(props);
     this.state = {
       showLog: false,
+      showSelectedDate: false
     };
 
     this.displayLog = this.displayLog.bind(this);
+    this.displayDay = this.displayDay.bind(this);
+    this.hideDay = this.hideDay.bind(this);
   } 
 
   displayLog() {
     this.setState(() => ({
       showLog: !this.state.showLog,
+    }));
+  }
+
+  displayDay() {
+    this.setState(() => ({
+      showSelectedDate: true,
+    }));
+  }
+
+  hideDay() {
+    this.setState(() => ({
+      showSelectedDate: false,
     }));
   }
 
@@ -38,10 +54,11 @@ class App extends React.Component {
               Mainichi Planner
             </span>
           </div>
-          <Navigation/>
+          <Navigation hideDay = {this.hideDay}/>
         </header>
         <main>
-          <Calendar/>
+          <Calendar displayDay = {this.displayDay}/>
+          { this.state.showSelectedDate ? <Day/> : null}
           <div>
             <Routes>
               <Route exact path='/' element={<Home/>}/>

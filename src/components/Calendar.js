@@ -2,10 +2,13 @@ import React from 'react';
 import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
 
 class Calendar extends React.Component {
-  state = {
-    currentMonth: new Date(),
-    selectedDate: new Date()
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentMonth: new Date(),
+      selectedDate: new Date()
+    };
+  } 
 
   renderHeader() {
     const dateFormat = 'MMMM yyyy';
@@ -74,7 +77,7 @@ class Calendar extends React.Component {
                     : isSameDay(day, selectedDate) ? 'selected' : ''
                 }`}
                key = {day}   
-               onClick = { () => this.onDateClick(cloneDay)}        
+               onClick = { () => {this.onDateClick(cloneDay); this.props.displayDay()}}        
             >
               <span className='number'>{formattedDate}</span>
               <span className='bg'>{formattedDate}</span>
@@ -95,7 +98,7 @@ class Calendar extends React.Component {
   
   onDateClick = day => {
     this.setState({
-      selectedDate: day
+      selectedDate: day,
     });
   }
 
