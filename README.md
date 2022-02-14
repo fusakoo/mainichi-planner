@@ -10,5 +10,4 @@ This is the individual project created as part of CS361 - Software Engineering I
 ---
 
 ## Credits
-
 * [react-calendar](https://github.com/moodydev/react-calendar) by moodydev: Referenced for Calendar implementation

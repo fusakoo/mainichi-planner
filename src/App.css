@@ -308,30 +308,6 @@ main {
   pointer-events: none;
 }
 
-.calendar .body .cell .bg {
-  font-weight: 700;
-  line-height: 1;
-  color: var(--main-color);
-  opacity: 0;
-  font-size: 6em;
-  position: absolute;
-  right: -.05em;
-  transition: .25s ease-out;
-  letter-spacing: -.07em;
-}
-
-@media only screen and (max-width: 790px) {
-  .calendar .body .cell .bg {
-    top: .2em;
-    font-size: 4.5em;
-  }
-}
-
-.calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
-  opacity: 0.05;
-  transition: .05s ease-out;
-}
-
 .calendar .body .col {
   flex-grow: 0;
   flex-basis: calc(100%/7);

@@ -93,7 +93,6 @@ class Calendar extends React.Component {
                onClick = { () => {this.onDateClick(cloneDay); this.props.displayDay()}}        
             >
               <span className='number'>{formattedDate}</span>
-              <span className='bg'>{formattedDate}</span>
           </div>
         );
         day = addDays(day, 1);
@@ -126,7 +125,7 @@ class Calendar extends React.Component {
     });
   }
 
-  selectToday =() => {
+  selectToday = () => {
     this.setState({
       selectedDate: new Date()
     });
