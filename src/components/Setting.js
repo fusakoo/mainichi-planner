@@ -3,8 +3,34 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class Setting extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      timezone: 'default',
+      startOfWeek: 'sunday'
+    };
+  }
+
   submit = (e) => {
     e.preventDefault();
+
+    const { timezone, startOfWeek } = this.state
+
+    if (timezone === 'gmt-8') {
+      this.props.resetTime()
+    }
+    if (timezone === 'gmt-6') {
+      this.props.adjustTime('2')
+    }
+    if (timezone === 'gmt-5') {
+      this.props.adjustTime('3')
+    }
+    if (timezone === 'gmt+9') {
+      this.props.adjustTime('17')
+    }
+
+    this.props.setStartOfWeek(startOfWeek)
+
     confirmAlert({
       title: 'Confirm to submit',
       message: 'Would you like to apply the settings?',
@@ -35,7 +61,7 @@ class Setting extends React.Component {
               <option value='large'>Large</option>
             </select>
             <label>Start of the Week: </label>
-            <select id='start-of-week' name='start-of-week' defaultValue='sunday'>
+            <select id='start-of-week' name='start-of-week' defaultValue='sunday' onChange={e=> this.setState({startOfWeek: e.target.value})}>
               <option value='sunday'>Sunday (Default)</option>
               <option value='monday'>Monday</option>
             </select>
@@ -48,11 +74,11 @@ class Setting extends React.Component {
               <option value='black'>Black</option>
             </select>
             <label>Timezone (Microservice feature): </label>
-            <select id='timezone' name='timezone' defaultValue='utc-8'>
-              <option value='utc-8'>UTC-08:00</option>
-              <option value='utc-6'>UTC-06:00</option>
-              <option value='utc-5'>UTC-05:00</option>
-              <option value='utc+9'>UTC+09:00</option>
+            <select id='timezone' name='timezone' defaultValue='gmt-8' onChange={e => this.setState({timezone: e.target.value})}>
+              <option value='gmt-8'>GMT-08:00 (Default)</option>
+              <option value='gmt-6'>GMT-06:00</option>
+              <option value='gmt-5'>GMT-05:00</option>
+              <option value='gmt+9'>GMT+09:00</option>
             </select>
             <h2 className='section-header'>Theme</h2>
             <div className='radio-button'>

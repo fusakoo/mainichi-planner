@@ -1,6 +1,7 @@
 import React from 'react';
 import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
 import Day from './Day';
+import Today from './Today';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -38,10 +39,21 @@ class Calendar extends React.Component {
   renderDays() {
     const dateFormat = 'EEEE';
     const days = [];
+    let start = 0;
+    let end = 7;
+
+    if (this.props.startOfWeek === 'sunday') {
+      start = 0;
+      end = 7;
+    }
+    if (this.props.startOfWeek === 'monday') {
+      start = 1;
+      end = 8;
+    }
 
     let startDate = startOfWeek(this.state.currentMonth);
 
-    for (let i = 0;i < 7;i++) {
+    for (let i = start;i < end;i++) {
       days.push(
         <div className='col col-center' key={i}>
           {format(addDays(startDate, i), dateFormat)}
@@ -130,6 +142,7 @@ class Calendar extends React.Component {
     return (
       <>
         <div className='calendar-container'>
+          <Today currentDateTime={this.props.currentDateTime}/>
           <div>
             <button className='select-today' onClick={() => {this.selectToday(); this.props.displayDay()}}>Today</button>
           </div>
