@@ -119,6 +119,12 @@ class Calendar extends React.Component {
       selectedDate: new Date()
     });
   }
+  
+  setImportant() {
+    this.setState(() => ({
+      important: !this.state.important,
+    }));
+  }
 
   render () {
     return (

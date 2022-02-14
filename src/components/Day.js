@@ -54,7 +54,6 @@ class Day extends React.Component {
               <h2 className='section-header'>Icons</h2>
               <span className='footnote'>Select up to 4 icons to display on calendar</span>
               <div className='icon-list'>
-                <FaPlane className='icon'/>
                 <FaFlag className='icon'/>
                 <FaThumbsUp className='icon'/>
                 <FaThumbsDown className='icon'/>
@@ -74,6 +73,7 @@ class Day extends React.Component {
                 <FaSkiing className='icon'/>
                 <FaSnowboarding className='icon'/>
                 <FaFutbol className='icon'/>
+                <FaBicycle className='icon'/>
                 <FaPray className='icon'/>
                 <FaShoppingCart className='icon'/>
                 <FaTheaterMasks className='icon'/>
@@ -83,7 +83,26 @@ class Day extends React.Component {
                 <FaUtensils className='icon'/>
                 <FaPizzaSlice className='icon'/>
                 <FaMitten className='icon'/>
+                <FaCoffee className='icon'/>
+                <FaWineGlassAlt className='icon'/>
+                <FaCocktail className='icon'/>
                 <FaUmbrellaBeach className='icon'/>
+                <FaUserMd className='icon'/>
+                <FaPrescription className='icon'/>
+                <FaTooth className='icon'/>
+                <FaRobot className='icon'/>
+                <FaPhoneAlt className='icon'/>
+                <FaLaptop className='icon'/>
+                <FaGasPump className='icon'/>
+                <FaHome className='icon'/>
+                <FaCity className='icon'/>
+                <FaCampground className='icon'/>
+                <FaBabyCarriage className='icon'/>
+                <FaBook className='icon'/>
+                <FaFish className='icon'/>
+                <FaCat className='icon'/>
+                <FaDog className='icon'/>
+                <FaHeart className='icon'/>
               </div>
             </form>
             <hr/>
