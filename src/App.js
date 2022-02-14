@@ -7,7 +7,6 @@ import Home from './components/Home';
 import Help from './components/Help';
 import Setting from './components/Setting';
 import ChangeLog from './components/ChangeLog';
-import Day from './components/Day';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -57,8 +56,7 @@ class App extends React.Component {
           <Navigation hideDay = {this.hideDay}/>
         </header>
         <main>
-          <Calendar displayDay = {this.displayDay}/>
-          { this.state.showSelectedDate ? <Day/> : null}
+          <Calendar displayDay = {this.displayDay} showSelectedDate = {this.state.showSelectedDate}/>
           <div>
             <Routes>
               <Route exact path='/' element={<Home/>}/>

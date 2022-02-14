@@ -1,5 +1,6 @@
 import React from 'react';
 import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
+import Day from './Day';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -124,7 +125,7 @@ class Calendar extends React.Component {
       <>
         <div className='calendar-container'>
           <div>
-            <button className='select-today' onClick={this.selectToday}>Today</button>
+            <button className='select-today' onClick={() => {this.selectToday(); this.props.displayDay()}}>Today</button>
           </div>
           <div className='calendar'>
             {this.renderHeader()}
@@ -132,6 +133,7 @@ class Calendar extends React.Component {
             {this.renderCells()}
           </div>
         </div>
+        {this.props.showSelectedDate? <Day date={this.state.selectedDate}/> : null}
       </>
     )
   }

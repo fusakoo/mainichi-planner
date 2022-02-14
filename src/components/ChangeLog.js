@@ -12,10 +12,9 @@ class Changelog extends React.Component {
               <h3>V1.0.0</h3>
               <p>The very first release of the Mainichi Planner app!<br/>Here are some of the key features:</p>
               <ul>
-                <li>Feature A</li>
-                <li>Feature B</li>
-                <li>Feature C</li>
-                <li>Feature D</li>
+                <li>Home, Help, and Setting pages are accessible</li>
+                <li>Change Log can be accessed in the bottom UI link</li>
+                <li>Individual Day UI is accessible by clicking on the days</li>
               </ul>
               <h3>V0.0.2</h3>
               <p>

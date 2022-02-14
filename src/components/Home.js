@@ -6,9 +6,23 @@ function Home() {
     <>
       <div className='content'>
         <h1 className='page-header'>Home</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget sem ac erat pellentesque ornare ac vitae augue. Nulla sed vehicula lectus. Sed hendrerit velit id turpis euismod, sed gravida mauris pretium. Nam ex turpis, porttitor et placerat quis, hendrerit sit amet urna. Donec ac enim eu massa pellentesque interdum non a elit. Nulla malesuada venenatis purus sit amet sollicitudin. Etiam id ex eu urna venenatis ultricies. Vivamus blandit elementum mi in vehicula. Phasellus non est eu metus pretium rutrum a non nibh. Vivamus dignissim justo ante, a blandit tellus ullamcorper vel. Sed dictum justo sed diam volutpat porta. Fusce consectetur ex nisi, id sagittis orci pharetra quis. Praesent iaculis libero quam, vel malesuada turpis rhoncus vel. Phasellus feugiat ornare felis sed commodo. Aenean et odio nec nisl faucibus molestie vitae non lectus. Proin congue elementum arcu a pharetra. 
-        </p>
+        <div className='text-content'>
+          <h2 className='section-header'>Welcome to Mainichi Planner!</h2>
+          <p>
+            Click on a day to get started, or if you are trying this app for the first time, 
+            check the help page for tutorial on how to use this app. Visit the setting page
+            if you'd like to adjust how your calendar looks, change the start of week, etc.        
+          </p>
+          <h2 className='section-header'>Updates</h2>
+          <h3 className='subsec-header'>V1.0.0</h3>
+          <p>First release of the app with frontend MVP implemented.</p>
+          <ul>
+            <li>Home, Help, and Setting pages are accessible</li>
+            <li>Change Log can be accessed in the bottom UI link</li>
+            <li>Individual Day UI is accessible by clicking on the days</li>
+          </ul>
+          <p>Please see Change Log for past patch/release notes.</p>
+        </div>
       </div>
     </>
   );
