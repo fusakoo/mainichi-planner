@@ -120,6 +120,7 @@ class Day extends React.Component {
                 </div>            
               </div>
               <h3 className='subsec-header'>Add new event:</h3>
+              <span className='footnote'>Create a new event by filling out the info below. Recurrence is set to No by default. Click submit to save the new event.</span>
               <div>
                 <label for='event-name'>Event name: </label>
                 <input type='text' id='event-name' name='event-name' maxlength='100' size='50'/>   
@@ -151,6 +152,7 @@ class Day extends React.Component {
             <hr/>
             <form onSubmit={this.submit}>
               <h2 className='section-header'>Notes</h2>
+              <span className='footnote'>Write a quick note and click Submit to save.</span>
               <textarea id='note' name='note' rows='10' cols='20' placeholder='Make any notes here.'></textarea>
               <input type="submit" value="Save" className='submit-button'/>
             </form>

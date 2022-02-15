@@ -16,28 +16,29 @@ class Setting extends React.Component {
 
     const { timezone, startOfWeek } = this.state
 
-    if (timezone === 'gmt-8') {
-      this.props.resetTime()
-    }
-    if (timezone === 'gmt-6') {
-      this.props.adjustTime('2')
-    }
-    if (timezone === 'gmt-5') {
-      this.props.adjustTime('3')
-    }
-    if (timezone === 'gmt+9') {
-      this.props.adjustTime('17')
-    }
-
-    this.props.setStartOfWeek(startOfWeek)
-
     confirmAlert({
       title: 'Confirm to submit',
       message: 'Would you like to apply the settings?',
       buttons: [
         {
           label: 'Yes',
-          onClick: () => alert('Settings applied.')
+          onClick: () => {
+            alert('Settings applied.');
+            if (timezone === 'gmt-8') {
+              this.props.resetTime()
+            }
+            if (timezone === 'gmt-6') {
+              this.props.adjustTime('2')
+            }
+            if (timezone === 'gmt-5') {
+              this.props.adjustTime('3')
+            }
+            if (timezone === 'gmt+9') {
+              this.props.adjustTime('17')
+            }
+        
+            this.props.setStartOfWeek(startOfWeek);
+          }
         },
         {
           label: 'No',
@@ -54,6 +55,7 @@ class Setting extends React.Component {
           <h1 className='page-header'>Setting</h1>
           <form onSubmit={this.submit}>
             <h2 className='section-header'>General Setting</h2>
+            <span className='footnote'>Select the changes you'd like to apply.</span>
             <label>Font Size: </label>
             <select id='font-size' name='font-size' defaultValue='medium'>
               <option value='small'>Small</option>
@@ -81,6 +83,7 @@ class Setting extends React.Component {
               <option value='gmt+9'>GMT+09:00</option>
             </select>
             <h2 className='section-header'>Theme</h2>
+            <span className='footnote'>Select the theme you'd like to apply.</span>
             <div className='radio-button'>
               <input type='radio' name='theme' id='default' value='default' defaultChecked></input>
               <label htmlFor='default'>Default</label>
@@ -102,6 +105,7 @@ class Setting extends React.Component {
           <hr/>
           <form id='import-export'>
             <h2 className='section-header'>Import / Export</h2>
+            <span className='footnote'>Export your current calendar and import your previous export.</span>
             <div>
               <label htmlFor='import'>Import a calendar: </label>
               <input type='file' id='import'/> 

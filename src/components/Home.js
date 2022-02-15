@@ -15,7 +15,14 @@ function Home() {
           </p>
           <h2 className='section-header'>Updates</h2>
           <h3 className='subsec-header'>V1.0.0</h3>
-          <p>First release of the app with frontend MVP implemented.</p>
+          <p>
+            First release of the app with frontend MVP implemented! 
+          </p>
+          <p>
+            Try out features like changing timezone to keep it in sync with your favorite
+            timezone, check the setting menu to explore current options available, 
+            help page to gather some information, and more.
+          </p>
           <ul>
             <li>Home, Help, and Setting pages are accessible</li>
             <li>Change Log can be accessed in the bottom UI link</li>
