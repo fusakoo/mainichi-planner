@@ -1,7 +1,13 @@
 import React from 'react';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
+import { format, utcToZonedTime } from 'date-fns-tz'
 
 class Today extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  } 
   greeting(time) {
     if (time === 'AM') {
       return <h1 className='section-header'>Good morning!</h1>
@@ -20,13 +26,29 @@ class Today extends React.Component {
     }
   }
 
+  renderDate() {
+    const date = this.props.currentDateTime
+    const timeZone = this.props.iana
+    const zonedDate = utcToZonedTime(date, timeZone)
+
+    return format(zonedDate, 'EEEE, MMMM dd, yyyy')
+  }
+
+  renderTime() {
+    const date = this.props.currentDateTime
+    const timeZone = this.props.iana
+    const zonedDate = utcToZonedTime(date, timeZone)
+
+    return format(zonedDate, 'hh:mm:ss aa \'GMT\'XXX (z)', { timeZone: timeZone })
+  }
+
   render(){
     return (
       <>
         <div className='today-info'>
           {this.greeting(format(this.props.currentDateTime, 'b'))}
           <p>
-            Today is {format(this.props.currentDateTime, 'EEEE, MMMM dd, yyyy')}. Time is currently {format(this.props.currentDateTime, 'hh:mm:ss aa (zzzz)')}
+            Today is {this.renderDate()}. Time is currently {this.renderTime()}.
           </p>
         </div>
       </>

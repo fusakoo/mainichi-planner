@@ -19,6 +19,31 @@ class Day extends React.Component {
     }
   }
 
+  // componentDidMount() {
+  //   fetch("https://icon-depot.herokuapp.com/icons-available", {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //         'mode': 'cors'
+  //       }
+  //   }).then(response => response.json())
+  //   .then(data => console.log(data['icons'])
+  //     )
+  //     // .then(
+  //     //   (result) => {
+  //     //     this.setState({
+  //     //       timezones: res
+  //     //     });
+  //     //   },
+  //     //   (error) => {
+  //     //     this.setState({
+  //     //       error
+  //     //     });
+  //     //   }
+  //     // )
+  //   }
+
   submit = (e) => {
     e.preventDefault();
     alert('Change saved.');
@@ -48,7 +73,7 @@ class Day extends React.Component {
             <form onSubmit={this.submit}>
               <div>
                 <input type="checkbox" id="important" name="important" value="important"/>
-                <label for="important" className='bold'>Mark day as important  </label> 
+                <label htmlFor="important" className='bold'>Mark day as important  </label> 
                 <span className='footnote'>(This will add a red box around the date)</span>
               </div>
               <h2 className='section-header'>Icons</h2>
@@ -122,8 +147,8 @@ class Day extends React.Component {
               <h3 className='subsec-header'>Add new event:</h3>
               <span className='footnote'>Create a new event by filling out the info below. Recurrence is set to No by default. Click submit to save the new event.</span>
               <div>
-                <label for='event-name'>Event name: </label>
-                <input type='text' id='event-name' name='event-name' maxlength='100' size='50'/>   
+                <label htmlFor='event-name'>Event name: </label>
+                <input type='text' id='event-name' name='event-name' maxLength='100' size='50'/>   
               </div>
               <div className='recurrence-container'>
                 <div className='radio-button events-radio'>

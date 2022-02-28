@@ -188,6 +188,7 @@ main {
   background-color: var(--sub-color);
   border-radius: 5px;
   padding-left: 1em;
+  padding-right: 1em;
   margin-bottom: 2em;
 }
 

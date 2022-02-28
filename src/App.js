@@ -9,7 +9,7 @@ import Setting from './components/Setting';
 import ChangeLog from './components/ChangeLog';
 
 import { Route, Routes } from 'react-router-dom';
-import { addSeconds, addHours } from 'date-fns';
+import { addSeconds } from 'date-fns';
 
 import './App.css';
 
@@ -20,11 +20,11 @@ class App extends React.Component {
       showLog: false,
       showSelectedDate: false,
       startOfWeek: 'sunday',
-      currentDateTime: new Date()
+      currentDateTime: new Date(),
+      iana: Intl.DateTimeFormat().resolvedOptions().timeZone
     };
 
-    this.adjustTime = this.adjustTime.bind(this);
-    this.resetTime = this.resetTime.bind(this);
+    this.setIana = this.setIana.bind(this);
     this.displayLog = this.displayLog.bind(this);
     this.displayDay = this.displayDay.bind(this);
     this.hideDay = this.hideDay.bind(this);
@@ -39,16 +39,11 @@ class App extends React.Component {
     }, 1000)
   }
 
-  adjustTime = hour => {
+  setIana = newIana => {
+    console.log(newIana)
     this.setState({
-      currentDateTime: addHours(this.state.currentDateTime, hour)
+      iana: newIana,
     });
-  }
-
-  resetTime() {
-    this.setState(() => ({
-      currentDateTime: new Date(),
-    }));
   }
 
   displayLog() {
@@ -88,12 +83,12 @@ class App extends React.Component {
           <Navigation hideDay={this.hideDay}/>
         </header>
         <main>
-          <Calendar displayDay={this.displayDay} showSelectedDate={this.state.showSelectedDate} startOfWeek={this.state.startOfWeek} currentDateTime={this.state.currentDateTime}/>
+          <Calendar displayDay={this.displayDay} showSelectedDate={this.state.showSelectedDate} startOfWeek={this.state.startOfWeek} currentDateTime={this.state.currentDateTime} iana={this.state.iana}/>
           <div>
             <Routes>
               <Route exact path='/' element={<Home/>}/>
               <Route path='/help' element={<Help/>}/>
-              <Route path='/setting' element={<Setting adjustTime={this.adjustTime} resetTime={this.resetTime} setStartOfWeek={this.setStartOfWeek}/>}/>
+              <Route path='/setting' element={<Setting setIana={this.setIana} setStartOfWeek={this.setStartOfWeek} currentDateTime={this.state.currentDateTime}/>}/>
             </Routes>
           </div>
         </main>

@@ -7,7 +7,7 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentMonth: new Date(),
+      currentMonth: this.props.currentDateTime,
       selectedDate: new Date()
     };
   } 
@@ -141,7 +141,7 @@ class Calendar extends React.Component {
     return (
       <>
         <div className='calendar-container'>
-          <Today currentDateTime={this.props.currentDateTime}/>
+          <Today currentDateTime={this.props.currentDateTime} iana={this.props.iana}/>
           <div>
             <button className='select-today' onClick={() => {this.selectToday(); this.props.displayDay()}}>Today</button>
           </div>
