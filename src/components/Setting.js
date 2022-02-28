@@ -97,7 +97,7 @@ class Setting extends React.Component {
                 <option value='green'>Green</option>
                 <option value='black'>Black</option>
               </select>
-              <label>Timezone (Microservice feature): </label>
+              <label>Timezone: </label>
               <select id='timezone' name='timezone' defaultValue='gmt-8' onChange={e => this.setState({timezone: e.target.value})}>
                 <option value={null}></option>
                 {time_options}
