@@ -1,5 +1,4 @@
 import React from 'react';
-// import { format } from 'date-fns';
 import { format, utcToZonedTime } from 'date-fns-tz'
 
 class Today extends React.Component {
