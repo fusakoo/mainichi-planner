@@ -27,13 +27,52 @@
 :root {
   --main-color: #85bd04;
   --sub-color: rgba(115, 185, 50, 0.5);
-  --text-color: #777;
-  --text-color-light: #ccc;
+  --logo-color: #212121;
+  --text-color: #212121;
+  --text-color-light: #757575;
   --border-color: #eee;
   --bg-color: #f1f0f0;
   --mainbg-color: #f7f7f7;
   --neutral-color: #fff;
 }
+
+[data-theme='dark'] {
+  --main-color: #8a53e2;
+  --sub-color: #7e44db;
+  --logo-color: #FFFFFF;
+  --text-color: rgb(228, 228, 228);
+  --text-color-light: rgb(177, 177, 177);
+  --border-color: rgb(44, 44, 44);
+  --bg-color: #503957;
+  --mainbg-color: #222222;
+  --neutral-color: rgb(14, 14, 14);
+}
+
+[data-theme='seafoam'] {
+  --main-color: #00796B;
+  --sub-color: #00BCD4;
+  --logo-color: #FFFFFF;
+  --text-color: #212121;
+  --text-color-light: #757575;
+  --border-color: #cbf1ee;
+  --bg-color: #009688;
+  --mainbg-color: white;
+  --neutral-color: #B2DFDB;
+}
+
+
+[data-theme='dandelion'] {
+  --main-color: #FF5722;
+  --sub-color: #F57C00;
+  --logo-color: #FFFFFF;
+  --text-color: #212121;
+  --text-color-light: #757575;
+  --border-color: #FFE0B2;
+  --bg-color: #E64A19;
+  --mainbg-color: white;
+  --neutral-color: #FF9800;
+}
+
 
 
 /* GENERAL */
@@ -42,7 +81,7 @@
   box-sizing: border-box;
 }
 
-body {
+.app {
     font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     font-size: 1em;
     font-weight: 300;
@@ -74,7 +113,7 @@ header #logo {
   /* align-items: flex-start;
   justify-content: flex-start; */
   margin-left: 1.5em;
-  color: var(--main-color);
+  color: var(--logo-color);
   line-height: 1;
 }
 
@@ -375,7 +414,7 @@ main {
   /* min-width: 600px; */
   width: 40em;
   height: 60em;
-  border: 1px solid var(--bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   box-shadow: 0 6px 6px hsl(0deg 0% 0% / 0.3);
 }
@@ -476,11 +515,13 @@ main {
 
 .content hr {
   margin: 25px;
+  border-color: var(--sub-color);
 }
 
 .day-content hr {
   margin-right: 25px;
   margin-left: 25px;
+  border-color: var(--sub-color);
 }
 
 .text-content h2 {

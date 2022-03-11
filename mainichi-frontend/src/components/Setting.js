@@ -9,8 +9,11 @@ class Setting extends React.Component {
       error: null,
       timezone: null,
       startOfWeek: 'sunday',
-      timezones: {}
+      timezones: {},
+      themeSelected: 'light'
     };
+
+    this.updateSelectedTheme = this.updateSelectedTheme.bind(this)
   }
 
   componentDidMount() {
@@ -37,13 +40,13 @@ class Setting extends React.Component {
       )
     }
 
-  submit = (e) => {
+  submitSetting = (e) => {
     e.preventDefault();
 
     const { timezone, startOfWeek } = this.state
 
     confirmAlert({
-      title: 'Confirm to submit',
+      title: 'Confirm to apply',
       message: 'Would you like to apply the settings?',
       buttons: [
         {
@@ -64,6 +67,35 @@ class Setting extends React.Component {
     });
   };
 
+  submitTheme = (e) => {
+    e.preventDefault();
+
+    confirmAlert({
+      title: 'Confirm to apply',
+      message: 'Would you like to apply the selected theme?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            alert('Theme applied.');
+            let newTheme = this.state.themeSelected
+            this.props.switchTheme(newTheme);
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Theme not applied.')
+        }
+      ]
+    });
+  }
+
+  updateSelectedTheme(e){
+    this.setState({
+      themeSelected: e.currentTarget.value,
+    })
+  }
+
   render() {
     const time_options = [];
     for (const[key,value] of Object.entries(this.state.timezones)) {
@@ -76,7 +108,7 @@ class Setting extends React.Component {
           <h1 className='page-header'>Setting</h1>
           <div className='text-content'>
             <h2 className='section-header'>General Setting</h2>
-            <form onSubmit={this.submit}>
+            <form onSubmit={this.submitSetting}>
               <span className='footnote'>Select the changes you'd like to apply.</span>
               <label>Font Size: </label>
               <select id='font-size' name='font-size' defaultValue='medium'>
@@ -107,15 +139,23 @@ class Setting extends React.Component {
             <hr/>
             <h2 className='section-header'>Advanced Setting</h2>
             <h3 className='subsec-header'>Theme</h3>
-            <form>
+            <form onSubmit={this.submitTheme}>
               <span className='footnote'>Select the theme you'd like to apply.</span>
               <div className='radio-button'>
-                <input type='radio' name='theme' id='default' value='default' defaultChecked></input>
-                <label htmlFor='default'>Light Theme (Default)</label>
+                <input type='radio' name='theme' id='light' value='light' defaultChecked onChange={this.updateSelectedTheme}></input>
+                <label htmlFor='default'>Light (Default)</label>
               </div>
               <div className='radio-button'>
-                <input type='radio' name='theme' id='dark' value='themeA'></input>
-                <label htmlFor='themeA'>Dark Theme</label>            
+                <input type='radio' name='theme' id='dark' value='dark' onChange={this.updateSelectedTheme}></input>
+                <label htmlFor='themeA'>Dark</label>            
+              </div>
+              <div className='radio-button'>
+                <input type='radio' name='theme' id='seafoam' value='seafoam' onChange={this.updateSelectedTheme}></input>
+                <label htmlFor='themeA'>Seafoam</label>            
+              </div>
+              <div className='radio-button'>
+                <input type='radio' name='theme' id='dandelion' value='dandelion' onChange={this.updateSelectedTheme}></input>
+                <label htmlFor='themeA'>Dandelion</label>            
               </div>
               {/* <div className='radio-button'>
                 <input type='radio' name='theme' id='themeB' value='themeB'></input>

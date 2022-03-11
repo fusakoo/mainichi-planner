@@ -21,7 +21,8 @@ class App extends React.Component {
       showSelectedDate: false,
       startOfWeek: 'sunday',
       currentDateTime: new Date(),
-      iana: Intl.DateTimeFormat().resolvedOptions().timeZone
+      iana: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      theme: 'light'
     };
 
     this.setIana = this.setIana.bind(this);
@@ -29,6 +30,7 @@ class App extends React.Component {
     this.displayDay = this.displayDay.bind(this);
     this.hideDay = this.hideDay.bind(this);
     this.setStartOfWeek = this.setStartOfWeek.bind(this);
+    this.switchTheme = this.switchTheme.bind(this);
   } 
 
   componentDidMount() {
@@ -70,9 +72,15 @@ class App extends React.Component {
     });
   }
 
+  switchTheme = newTheme => {
+    this.setState({
+      theme: newTheme,
+    })
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="app" data-theme={this.state.theme}>
         <header>
           <div id="logo">
             <span className="material-icon">event</span>
@@ -88,7 +96,7 @@ class App extends React.Component {
             <Routes>
               <Route exact path='/' element={<Home/>}/>
               <Route path='/help' element={<Help/>}/>
-              <Route path='/setting' element={<Setting setIana={this.setIana} setStartOfWeek={this.setStartOfWeek} currentDateTime={this.state.currentDateTime}/>}/>
+              <Route path='/setting' element={<Setting setIana={this.setIana} setStartOfWeek={this.setStartOfWeek} currentDateTime={this.state.currentDateTime} switchTheme={this.switchTheme}/>}/>
             </Routes>
           </div>
         </main>
