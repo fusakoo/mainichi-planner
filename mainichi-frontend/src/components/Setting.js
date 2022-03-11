@@ -84,11 +84,11 @@ class Setting extends React.Component {
                 <option value='medium'>Medium (Default)</option>
                 <option value='large'>Large</option>
               </select>
-              <label>Start of the Week: </label>
+              {/* <label>Start of the Week: </label>
               <select id='start-of-week' name='start-of-week' defaultValue='sunday' onChange={e=> this.setState({startOfWeek: e.target.value})}>
                 <option value='sunday'>Sunday (Default)</option>
                 <option value='monday'>Monday</option>
-              </select>
+              </select> */}
               <label>Date highlight color: </label>
               <select id='highlight' name='highlight' defaultValue='default'>
                 <option value='default'>Default</option>
@@ -111,34 +111,21 @@ class Setting extends React.Component {
               <span className='footnote'>Select the theme you'd like to apply.</span>
               <div className='radio-button'>
                 <input type='radio' name='theme' id='default' value='default' defaultChecked></input>
-                <label htmlFor='default'>Default</label>
+                <label htmlFor='default'>Light Theme (Default)</label>
               </div>
               <div className='radio-button'>
-                <input type='radio' name='theme' id='themeA' value='themeA'></input>
-                <label htmlFor='themeA'>Theme A</label>            
+                <input type='radio' name='theme' id='dark' value='themeA'></input>
+                <label htmlFor='themeA'>Dark Theme</label>            
               </div>
-              <div className='radio-button'>
+              {/* <div className='radio-button'>
                 <input type='radio' name='theme' id='themeB' value='themeB'></input>
-                <label htmlFor='themeB'>Theme B</label>            
+                <label htmlFor='themeB'>theme B</label>            
               </div>
               <div className='radio-button'>
                 <input type='radio' name='theme' id='themeC' value='themeC'></input>
                 <label htmlFor='themeC'>Theme C</label>            
-              </div>
+              </div> */}
               <input type="submit" value="Submit" className='submit-button'/>
-            </form>
-            <h3 className='subsec-header'>Import / Export</h3>
-            <form id='import-export'>
-              <span className='footnote'>Export your current calendar and import your previous export.</span>
-              <div>
-                <label htmlFor='import'>Import a calendar: </label>
-                <input type='file' id='import'/> 
-              </div>
-              <input type='submit' value='Import a file' className='submit-button'></input>
-            </form>
-            <form>
-              <label>Export current calendar</label>
-              <input type='submit' value='Export'className='submit-button'></input>
             </form>
           </div>
         </div>
