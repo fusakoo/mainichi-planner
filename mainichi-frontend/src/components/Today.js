@@ -7,12 +7,19 @@ class Today extends React.Component {
     this.state = {
     };
   } 
-  greeting() {
-    const date = this.props.currentDateTime
-    const timeZone = this.props.iana
-    const zonedDate = utcToZonedTime(date, timeZone)
 
-    let time = format(zonedDate, 'b')
+  getDateInfo() {
+    const date = this.props.currentDateTime;
+    const timeZone = this.props.iana;
+    const zonedDate = utcToZonedTime(date, timeZone);
+
+    return [date, timeZone, zonedDate];
+  }
+  
+  greeting() {
+    const zonedDate = this.getDateInfo()[2];
+
+    let time = format(zonedDate, 'b');
 
     if (time === 'AM') {
       return <h1 className='section-header'>Good morning!</h1>
@@ -28,23 +35,20 @@ class Today extends React.Component {
     }
     else {
       return <h1 className='section-header'>Hello and welcome!</h1>
-    }
+    };
   }
 
   renderDate() {
-    const date = this.props.currentDateTime
-    const timeZone = this.props.iana
-    const zonedDate = utcToZonedTime(date, timeZone)
+    const zonedDate = this.getDateInfo()[2];
 
-    return format(zonedDate, 'EEEE, MMMM dd, yyyy')
+    return format(zonedDate, 'EEEE, MMMM dd, yyyy');
   }
 
   renderTime() {
-    const date = this.props.currentDateTime
-    const timeZone = this.props.iana
-    const zonedDate = utcToZonedTime(date, timeZone)
+    const timeZone = this.getDateInfo()[1],
+          zonedDate = this.getDateInfo()[2];
 
-    return format(zonedDate, 'hh:mm:ss aa \'GMT\'XXX (z)', { timeZone: timeZone })
+    return format(zonedDate, 'hh:mm:ss aa \'GMT\'XXX (z)', { timeZone: timeZone });
   }
 
   render(){
