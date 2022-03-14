@@ -107,28 +107,28 @@ class Setting extends React.Component {
         <div className='content'>
           <h1 className='page-header'>Setting</h1>
           <div className='text-content'>
-            <h2 className='section-header'>General Setting</h2>
+            <h2 className='section-header'>Select Timezone</h2>
             <form onSubmit={this.submitSetting}>
-              <span className='footnote'>Select the changes you'd like to apply.</span>
-              <label>Font Size: </label>
+              <span className='footnote'>Select the timezone you'd like to select.</span>
+              {/* <label>Font Size: </label>
               <select id='font-size' name='font-size' defaultValue='medium'>
                 <option value='small'>Small</option>
                 <option value='medium'>Medium (Default)</option>
                 <option value='large'>Large</option>
-              </select>
+              </select> */}
               {/* <label>Start of the Week: </label>
               <select id='start-of-week' name='start-of-week' defaultValue='sunday' onChange={e=> this.setState({startOfWeek: e.target.value})}>
                 <option value='sunday'>Sunday (Default)</option>
                 <option value='monday'>Monday</option>
               </select> */}
-              <label>Date highlight color: </label>
+              {/* <label>Date highlight color: </label>
               <select id='highlight' name='highlight' defaultValue='default'>
                 <option value='default'>Default</option>
                 <option value='red'>Red</option>
                 <option value='blue'>Blue</option>
                 <option value='green'>Green</option>
                 <option value='black'>Black</option>
-              </select>
+              </select> */}
               <label>Timezone: </label>
               <select id='timezone' name='timezone' defaultValue='gmt-8' onChange={e => this.setState({timezone: e.target.value})}>
                 <option value={null}></option>
@@ -136,11 +136,10 @@ class Setting extends React.Component {
               </select>
               <input type="submit" value="Submit" className='submit-button'/>
             </form>
-            <hr/>
-            <h2 className='section-header'>Advanced Setting</h2>
-            <h3 className='subsec-header'>Theme</h3>
+            <h2 className='section-header'>Customize Theme</h2>
+            <h3 className='subsec-header'>Colors</h3>
             <form onSubmit={this.submitTheme}>
-              <span className='footnote'>Select the theme you'd like to apply.</span>
+              <span className='footnote'>Select the theme color you'd like to apply.</span>
               <div className='radio-button'>
                 <input type='radio' name='theme' id='light' value='light' defaultChecked onChange={this.updateSelectedTheme}></input>
                 <label htmlFor='default'>Light (Default)</label>
