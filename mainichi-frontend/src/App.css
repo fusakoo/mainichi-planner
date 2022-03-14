@@ -66,7 +66,7 @@
   --sub-color: #F57C00;
   --logo-color: #FFFFFF;
   --text-color: #212121;
-  --text-color-light: #757575;
+  --text-color-light: #383838;
   --border-color: #FFE0B2;
   --bg-color: #E64A19;
   --mainbg-color: white;
@@ -88,6 +88,8 @@
     background: var(--mainbg-color);
     position: relative;
 }
+
+/* HEADER */
 
 header {
   display: flex;
@@ -154,6 +156,8 @@ header #logo .icon {
   padding-right: .25em;
 }
 
+/* MAIN */
+
 main {
   display: flex;
   align-items: center;
@@ -179,6 +183,7 @@ main {
 
 .footnote {
   font-size: 1em;
+  color: var(--text-color-light);
 }
 
 /* GRID - CALENDAR */
@@ -582,11 +587,13 @@ main {
 
 footer {
   text-align: center;
+  padding-bottom: 0.5em;
 }
 
 footer a {
   color: var(--main-color);
   text-decoration: none;
+  padding-left: 0.2em;
 }
 
 footer a:visited {
@@ -600,4 +607,6 @@ footer .link-button {
   cursor: pointer;
   line-height: 1;
   color: var(--main-color);
+  font-size: 0.9em;
+  padding: 0;
 }

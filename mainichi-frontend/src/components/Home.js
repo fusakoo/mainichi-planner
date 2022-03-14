@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Home() {
-  // const location = useLocation();
   return (
     <>
       <div className='content'>
@@ -13,8 +12,16 @@ function Home() {
             check the help page for tutorial on how to use this app. Visit the setting page
             if you'd like to adjust how your calendar looks, change the start of week, etc.        
           </p>
+          <hr/>
           <h2 className='section-header'>Updates</h2>
+          <h3 className='subsec-header'>V1.1.0</h3>
+          <p>Feb 27, 2022</p>
+          <p>Microservice integration (Datetime microservice provided by my CS361 teammate Marcos. Thanks!)</p>
+          <ul>
+            <li>In setting, timezone can now be selected from a list of timezone to update the greetings message</li>
+          </ul>
           <h3 className='subsec-header'>V1.0.0</h3>
+          <p>Feb 13, 2022</p>
           <p>
             First release of the app with frontend MVP implemented! 
           </p>

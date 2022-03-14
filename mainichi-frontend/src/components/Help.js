@@ -47,7 +47,11 @@ function Help() {
           </ul>
           <hr/>  
           <h2 className='section-header'>Feedbacks?</h2>
-          <p>Please feel free to shoot an email to <a href = "mailto: test123@testmail.com">test123@testmail.com</a> for any feedback/suggestion/etc.!</p>
+          <p>
+            For any feedback/suggestion/etc., please feel free raise an issue to 
+            this project's <a href = "https://github.com/fusakoo/mainichi-planner/issues"> Github</a>.
+            Thank you for your support!
+          </p>
         </div>
       </div>
     </>

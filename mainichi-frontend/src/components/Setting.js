@@ -107,9 +107,9 @@ class Setting extends React.Component {
         <div className='content'>
           <h1 className='page-header'>Setting</h1>
           <div className='text-content'>
-            <h2 className='section-header'>Select Timezone</h2>
+            <h2 className='section-header'>General Setting</h2>
             <form onSubmit={this.submitSetting}>
-              <span className='footnote'>Select the timezone you'd like to select.</span>
+              <span className='footnote'>Select the options you'd like to make the change.</span>
               {/* <label>Font Size: </label>
               <select id='font-size' name='font-size' defaultValue='medium'>
                 <option value='small'>Small</option>
