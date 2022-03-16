@@ -1,11 +1,5 @@
-# Ignore these for now
+# Ignore node_modules
 node_modules
 
-app/controllers/tutorial.controller.js
-
-app/models/index.js
-app/models/tutorial.model.js
-
-# Ignore the config file
-app/config/db.config.js
+# Ignore the env file
 .env
