@@ -35,7 +35,10 @@ exports.findDate = (req,res) => {
       res.send(data);
     } else {
       // Create the date if it doesn't exist in the DB
-      Date.create(date)
+      const newDate = {
+        date: req.params.date
+      }
+      Date.create(newDate)
       .then(data => {
         res.send(data);
       })
@@ -58,8 +61,7 @@ exports.findDate = (req,res) => {
 // Update the note of the Date
 exports.updateNote = (req,res) => {
   const date = req.params.date;
-  const selectedDate = Date.findByPk(date);
-  selectedDate.update(req.body, {
+  Date.update(req.body, {
     where: { date: date }
   })
   .then(num => {
@@ -83,8 +85,7 @@ exports.updateNote = (req,res) => {
 // Update the important boolean (importance) of the Date
 exports.updateImportant = (req,res) => {
   const date = req.params.date;
-  const selectedDate = Date.findByPk(date);
-  selectedDate.update(req.body, {
+  Date.update(req.body, {
     where: { date: date }
   })
   .then(num => {

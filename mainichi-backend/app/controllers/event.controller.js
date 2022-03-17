@@ -33,7 +33,7 @@ exports.deleteEvent = (req,res) => {
   Event.destroy({
     where: {
       eventName: eventName,
-      date: date
+      dateDate: date
     }
   })
   .then(num => {

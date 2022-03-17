@@ -1,5 +1,38 @@
 const db = require("../models");
-const DateIcon = db.DateIcon;
+const Icon = db.icon;
+const DateIcon = db.dateIcon;
+
+// Create an Icon
+exports.createIcon = (req,res) => {
+  const icon = {
+    iconName: req.params.icon,
+  };
+  Icon.create(icon)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Something went wrong while creating the Icon."
+    });
+  });
+}
+
+// Retrieve all the icons for the date
+exports.findAll = (req, res) => {
+  const date = req.params.date;
+  DateIcon.findAll({where: {date: date}})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Something went wrong while retrieving the icons."
+    });
+  });
+}
 
 // Add an icon to the date
 exports.createIconDate = (req,res) => {
@@ -11,7 +44,7 @@ exports.createIconDate = (req,res) => {
   }
   const dateIcon = {
     iconName: req.body.icon_name,
-    dateDate: req.body.date
+    date: req.body.date
   };
   DateIcon.create(dateIcon)
   .then(data => {
@@ -20,7 +53,7 @@ exports.createIconDate = (req,res) => {
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Something went wrong while creating the Date - Icon relationship."
+        err.message || "Something went wrong while creating the Icon-date relation."
     });
   });
 };
@@ -32,7 +65,7 @@ exports.deleteIconDate = (req,res) => {
   DateIcon.destroy({
     where: {
       iconName: iconName,
-      dateDate: date
+      date: date
     }
   })
   .then(num => {

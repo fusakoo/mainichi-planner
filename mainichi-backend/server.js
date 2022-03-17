@@ -5,7 +5,7 @@ require("dotenv").config();
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: process.env.FRONTEND_URL
 };
 
 app.use(cors(corsOptions));
@@ -33,5 +33,6 @@ require("./app/routes/icon.routes.js")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server is running on ${process.env.HOST}:${PORT}.`);
+  console.log(`Server is waiting for ${process.env.FRONTEND_URL}.`)
 });
