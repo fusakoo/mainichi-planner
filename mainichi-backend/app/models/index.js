@@ -22,25 +22,19 @@ db.event = require("./event.model.js")(sequelize, Sequelize);
 db.icon = require("./icon.model.js")(sequelize, Sequelize);
 // M:M Date and Icon
 db.icon.belongsToMany(db.date, {
-  through: "date_icon",
-  as: "icons",
-  foreignKey: "icon_name"
+  through: "dateIcon",
+  // as: "icons",
+  foreignKey: "iconName"
 });
 db.date.belongsToMany(db.icon, {
-  through: "date_icon",
-  as: "date_icons",
+  through: "dateIcon",
+  // as: "date_icons",
   foreignKey: "date"
 });
-// M:M Date and Event
-db.event.belongsToMany(db.date, {
-  through: "date_event",
-  as: "events",
-  foreignKey: "id"
-});
-db.date.belongsToMany(db.event, {
-  through: "date_event",
-  as: "date_events",
-  foreignKey: "date"
+// O:M Date and Event
+db.event.belongsTo(db.date);
+db.date.hasMany(db.event, {
+  as: "events"
 });
 
 module.exports = db;

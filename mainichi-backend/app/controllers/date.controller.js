@@ -1,6 +1,5 @@
 const db = require("../models");
 const Date = db.date;
-const Op = Sequelize.op;
 
 // Create a date if it doesn't exist
 exports.createDate = (req,res) => {

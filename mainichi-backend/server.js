@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 
 var corsOptions = {
@@ -21,11 +23,15 @@ db.sequelize.sync({ force: true }).then(() => {
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to fusakoo application." });
+  res.json({ message: "Mainichi app backend api." });
 });
 
+require("./app/routes/date.routes.js")(app);
+require("./app/routes/event.routes.js")(app);
+require("./app/routes/icon.routes.js")(app);
+
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
