@@ -47,7 +47,8 @@ class App extends React.Component {
     for (var i in IconList) {
       fetch( 'http://localhost:3001/api/icon/' + IconList[i], {
         method: 'POST'
-      }).then(response => response.json())
+      })
+      .then(response => response.json())
       .catch(error => {
         alert(error);
       });

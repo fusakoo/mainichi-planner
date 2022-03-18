@@ -91,7 +91,7 @@ class Day extends React.Component {
               <label htmlFor="important" className='bold'>Mark day as important  </label> 
               <span className='footnote'>(This will add a red box around the date)</span>
             </div>
-            <Icons updateIcons={this.props.updateIcons} icons={this.props.icons}/>
+            <Icons updateIcons={this.props.updateIcons} icons={this.props.icons} selectedIcons={this.props.selectedIcons} date_formatted={this.props.date_formatted}/>
             <hr/>
             <form onSubmit={this.eventSubmit}>
               <h2 className='section-header'>Events</h2>

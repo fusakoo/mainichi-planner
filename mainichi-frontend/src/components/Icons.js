@@ -11,7 +11,7 @@ class Icons extends React.Component {
   }
 
   checkIcons = icon => {
-    if (this.props.icons.has(icon)) {
+    if (this.props.selectedIcons.has(icon)) {
       return true
     } else {
       return false
@@ -39,32 +39,53 @@ class Icons extends React.Component {
     return icons
   }
 
-  noteSubmit = (e) => {
-    e.preventDefault();
-
-    fetch( 'http://localhost:3001/api/date/note/' + this.props.date_formatted, {
-      method: 'PUT',
+  addIcon = icon => {
+    fetch( 'http://localhost:3001/api/icon/', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        note: this.state.newNote
+        iconName: icon,
+        date: this.props.date_formatted
       })
     }).then(response => response.json())
-    .then(data => {
-      if (alert("Note updated.")) {
-      } else {
-        window.location.reload();
-      }
-    })
     .catch(error => {
       alert(error);
     });
   }
 
+  dropIcon = icon => {
+    fetch( 'http://localhost:3001/api/icon/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        iconName: icon,
+        date: this.props.date_formatted
+      })
+    }).then(response => response.json())
+    .catch(error => {
+      alert(error);
+    });
+  }
+
+  iconSubmit = (e) => {
+    e.preventDefault();
+
+    this.props.icons.forEach((oldIcon) => {
+      this.dropIcon(oldIcon)
+    })
+    this.props.selectedIcons.forEach((newIcon) => {
+      this.addIcon(newIcon)
+    })
+    alert('Icons saved.')
+  }
+
   render(){
     return (
-      <form onSubmit={this.submit}>
+      <form onSubmit={this.iconSubmit}>
         <h2 className='section-header'>Icons</h2>
         <span className='footnote'>Select up to 4 icons to display on calendar</span>
         <div className='icon-list'>

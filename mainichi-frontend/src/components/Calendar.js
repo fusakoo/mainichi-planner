@@ -14,6 +14,7 @@ class Calendar extends React.Component {
       note: '',
       important: false,
       icons: new Set(),
+      selectedIcons: new Set(),
       events: []
     };
     this.updateIcons = this.updateIcons.bind(this);
@@ -228,17 +229,17 @@ class Calendar extends React.Component {
   }
 
   updateIcons = icon => {
-    var currIcons = this.state.icons
+    var currIcons = this.state.selectedIcons
     if (currIcons.has(icon)){
       currIcons.delete(icon)
       this.setState({
-        icons: currIcons
+        selectedIcons: currIcons
       })
     } else {
       if (currIcons.size < 4){
         currIcons.add(icon)
         this.setState({
-          icons: currIcons
+          selectedIcons: currIcons
         })
       }
     }
@@ -258,7 +259,7 @@ class Calendar extends React.Component {
             {this.renderCells()}
           </div>
         </div>
-        {this.props.showSelectedDate? <Day updateIcons={this.updateIcons} date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} events={this.state.events}/> : null}
+        {this.props.showSelectedDate? <Day updateIcons={this.updateIcons} date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} selectedIcons={this.state.selectedIcons} events={this.state.events}/> : null}
       </>
     )
   }
