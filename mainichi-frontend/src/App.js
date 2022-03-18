@@ -23,7 +23,8 @@ class App extends React.Component {
       startOfWeek: 'sunday',
       currentDateTime: new Date(),
       iana: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      theme: 'light'
+      theme: 'light',
+      dataIsLoaded: false
     };
 
     this.setIana = this.setIana.bind(this);
@@ -40,10 +41,16 @@ class App extends React.Component {
         currentDateTime : addSeconds(this.state.currentDateTime, 1)
       })
     }, 1000)
-    this.ingestIcons(IconList)
+    // Load the icon data to database
+    if(this.state.dataIsLoaded === false){
+      this.loadIcons(IconList)
+      this.setState({
+        dataIsLoaded: !this.state.dataIsLoaded
+      })
+    }
   }
 
-  ingestIcons = IconList => {
+  loadIcons = IconList => {
     for (var i in IconList) {
       fetch( 'http://localhost:3001/api/icon/' + IconList[i], {
         method: 'POST'

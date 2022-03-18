@@ -26,8 +26,8 @@ class Icons extends React.Component {
         <span className = {
           `icon material-icons
           ${
-            !this.checkIcons(iconName)
-              ? '' : 'highlight'
+            this.checkIcons(iconName)
+              ? 'highlight' : ''
           }`
         }
         value = {iconName}

@@ -90,7 +90,6 @@ class Calendar extends React.Component {
       for (let i = 0;i < 7;i++) {
         formattedDate = format(day, dateFormat);
         const cloneDay = day;
-        // var eventCount = this.fetchEventCount(day)
 
         days.push(
           <div className = {
@@ -103,7 +102,7 @@ class Calendar extends React.Component {
                onClick = { () => {this.onDateClick(cloneDay); this.props.displayDay()}}        
             >
               <span className='number'>{formattedDate}</span>
-              {/* <span className='event-count'>{eventCount}</span> */}
+              {/* <span className='event-count'>Num</span> */}
           </div>
         );
         day = addDays(day, 1);
@@ -115,25 +114,7 @@ class Calendar extends React.Component {
       );
       days = [];
     }
-
     return <div className='body'>{rows}</div>
-  }
-
-  fetchEventCount = day => {
-    fetch( 'http://localhost:3001/api/event/' + format(day,'yyyy-MM-dd') , {
-      method: 'GET'
-    }).then(response => response.text())
-    .then(data => {
-      var json = JSON.parse(data);
-      var events = []
-      for (var row in json) {
-        events.push(json[row].eventName)
-      }
-      return events.length
-    })
-    .catch(error => {
-      alert(error);
-    });
   }
   
   fetchDate = day => {

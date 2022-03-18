@@ -13,6 +13,29 @@ class Day extends React.Component {
     }
   }
 
+  // importanceSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   fetch( 'http://localhost:3001/api/date/important/' + this.props.date_formatted, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       important: !this.props.important
+  //     })
+  //   }).then(response => response.json())
+  //   .then(data => {
+  //     if (alert("Note updated.")) {
+  //     } else {
+  //       window.location.reload();
+  //     }
+  //   })
+  //   .catch(error => {
+  //     alert(error);
+  //   });
+  // }
+
   eventSubmit = (e) => {
     e.preventDefault();
 
@@ -60,37 +83,23 @@ class Day extends React.Component {
     });
   }
 
-  displayFrequency = event => {
-    if (event.target.value && typeof event.target.value === "string") {
-      if (event.target.value.toLowerCase() === "true") {
-        this.setState(() => ({
-          showFrequency: true
-        }));
-      }
-      if (event.target.value.toLowerCase() === "false") {
-        this.setState(() => ({
-          showFrequency: false
-        }));
-      }
-    }
-  }
-
   render() {
     return (
       <>
         <div className='day-container'>
           <h1 className='page-header'>{format(this.props.date, 'MMMM dd, yyyy (EEEE)')}</h1>
           <div className='day-content'>
-            <div>
+            {/* <div>
               <input 
                 type="checkbox" 
                 id="important" 
                 name="important" 
                 value="important"
-              />
+                onChange={()=> this.importanceSubmit}
+                />
               <label htmlFor="important" className='bold'>Mark day as important  </label> 
-              <span className='footnote'>(This will add a red box around the date)</span>
-            </div>
+              <span className='footnote'>(This will add a box around the date)</span>
+            </div> */}
             <Icons updateIcons={this.props.updateIcons} icons={this.props.icons} selectedIcons={this.props.selectedIcons} date_formatted={this.props.date_formatted}/>
             <hr/>
             <form onSubmit={this.eventSubmit}>
