@@ -13,9 +13,10 @@ class Calendar extends React.Component {
       date_formatted: format(new Date(), 'yyyy-MM-dd'),
       note: '',
       important: false,
-      icons: [],
+      icons: new Set(),
       events: []
     };
+    this.updateIcons = this.updateIcons.bind(this);
   } 
 
   renderHeader() {
@@ -88,6 +89,8 @@ class Calendar extends React.Component {
       for (let i = 0;i < 7;i++) {
         formattedDate = format(day, dateFormat);
         const cloneDay = day;
+        // var eventCount = this.fetchEventCount(day)
+
         days.push(
           <div className = {
                 `col cell ${
@@ -99,6 +102,7 @@ class Calendar extends React.Component {
                onClick = { () => {this.onDateClick(cloneDay); this.props.displayDay()}}        
             >
               <span className='number'>{formattedDate}</span>
+              {/* <span className='event-count'>{eventCount}</span> */}
           </div>
         );
         day = addDays(day, 1);
@@ -112,6 +116,23 @@ class Calendar extends React.Component {
     }
 
     return <div className='body'>{rows}</div>
+  }
+
+  fetchEventCount = day => {
+    fetch( 'http://localhost:3001/api/event/' + format(day,'yyyy-MM-dd') , {
+      method: 'GET'
+    }).then(response => response.text())
+    .then(data => {
+      var json = JSON.parse(data);
+      var events = []
+      for (var row in json) {
+        events.push(json[row].eventName)
+      }
+      return events.length
+    })
+    .catch(error => {
+      alert(error);
+    });
   }
   
   fetchDate = day => {
@@ -141,7 +162,8 @@ class Calendar extends React.Component {
         icons.push(json[row].iconName)
       }
       this.setState({
-        icons: icons
+        icons: new Set(icons),
+        selectedIcons: new Set(icons)
       })
     })
     .catch(error => {
@@ -205,6 +227,23 @@ class Calendar extends React.Component {
     }));
   }
 
+  updateIcons = icon => {
+    var currIcons = this.state.icons
+    if (currIcons.has(icon)){
+      currIcons.delete(icon)
+      this.setState({
+        icons: currIcons
+      })
+    } else {
+      if (currIcons.size < 4){
+        currIcons.add(icon)
+        this.setState({
+          icons: currIcons
+        })
+      }
+    }
+  }
+
   render () {
     return (
       <>
@@ -219,7 +258,7 @@ class Calendar extends React.Component {
             {this.renderCells()}
           </div>
         </div>
-        {this.props.showSelectedDate? <Day date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} events={this.state.events}/> : null}
+        {this.props.showSelectedDate? <Day updateIcons={this.updateIcons} date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} events={this.state.events}/> : null}
       </>
     )
   }

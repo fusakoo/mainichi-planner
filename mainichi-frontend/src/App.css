@@ -36,6 +36,7 @@
   --neutral-color: #fff;
 
   --notebg-color: rgb(243, 243, 243);
+  --highlight-color: #b3ff01;
 }
 
 [data-theme='dark'] {
@@ -48,6 +49,8 @@
   --bg-color: #503957;
   --mainbg-color: #222222;
   --neutral-color: rgb(14, 14, 14);
+
+  --highlight-color: #6200ff;
 }
 
 [data-theme='seafoam'] {
@@ -60,6 +63,8 @@
   --bg-color: #009688;
   --mainbg-color: white;
   --neutral-color: #B2DFDB;
+
+  --highlight-color: #00e4c9;
 }
 
 
@@ -73,6 +78,8 @@
   --bg-color: #E64A19;
   --mainbg-color: white;
   --neutral-color: #FF9800;
+
+  --highlight-color: #fd3b00;
 }
 
 /* GENERAL */
@@ -548,19 +555,22 @@ main {
 
 .icon-list {
   border: 1px solid var(--border-color);
-  height: 6.2em;
+  padding: 2px;
+  height: 7em;
   overflow: wrap;
 }
 
 .icon {
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 5px;
+  margin: 4px;
   cursor: pointer;
 }
 
 .icon:hover {
   color: var(--main-color);
+}
+
+.highlight {
+  color: var(--highlight-color);
 }
 
 .event-list {

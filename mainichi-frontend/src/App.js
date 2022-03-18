@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Help from './components/Help';
 import Setting from './components/Setting';
 import ChangeLog from './components/ChangeLog';
+import IconList from './components/IconList';
 
 import { Route, Routes } from 'react-router-dom';
 import { addSeconds } from 'date-fns';
@@ -39,10 +40,21 @@ class App extends React.Component {
         currentDateTime : addSeconds(this.state.currentDateTime, 1)
       })
     }, 1000)
+    this.ingestIcons(IconList)
+  }
+
+  ingestIcons = IconList => {
+    for (var i in IconList) {
+      fetch( 'http://localhost:3001/api/icon/' + IconList[i], {
+        method: 'POST'
+      }).then(response => response.json())
+      .catch(error => {
+        alert(error);
+      });
+    }
   }
 
   setIana = newIana => {
-    console.log(newIana)
     this.setState({
       iana: newIana,
     });
