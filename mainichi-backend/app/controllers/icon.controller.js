@@ -22,7 +22,10 @@ exports.createIcon = (req,res) => {
 // Retrieve all the icons for the date
 exports.findAll = (req, res) => {
   const date = req.params.date;
-  DateIcon.findAll({where: {date: date}})
+  DateIcon.findAll({
+    where: {date: date},
+    attributes: ['iconName']
+  })
   .then(data => {
     res.send(data);
   })
@@ -36,14 +39,14 @@ exports.findAll = (req, res) => {
 
 // Add an icon to the date
 exports.createIconDate = (req,res) => {
-  if (!req.body.icon_name) {
+  if (!req.body.iconName) {
     res.status(400).send({
       message: "Icon name cannot be empty."
     });
     return;
   }
   const dateIcon = {
-    iconName: req.body.icon_name,
+    iconName: req.body.iconName,
     date: req.body.date
   };
   DateIcon.create(dateIcon)
@@ -60,7 +63,7 @@ exports.createIconDate = (req,res) => {
 
 // Delete an icon from the date
 exports.deleteIconDate = (req,res) => {
-  const iconName = req.body.icon_name;
+  const iconName = req.body.iconName;
   const date = req.body.date;
   DateIcon.destroy({
     where: {

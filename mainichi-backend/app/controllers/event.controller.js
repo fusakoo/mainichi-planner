@@ -1,17 +1,35 @@
 const db = require("../models");
-const Date = db.date;
 const Event = db.event;
+
+// Retrieve all the events for the date
+exports.findAll = (req, res) => {
+  const date = req.params.date;
+  Event.findAll({
+    where: {dateDate: date},
+    attributes: ['eventName']
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Something went wrong while retrieving the icons."
+    });
+  });
+}
+
 
 // Create an Event
 exports.createEvent = (req,res) => {
-  if (!req.body.event_name) {
+  if (!req.body.eventName) {
     res.status(400).send({
       message: "Event name cannot be empty."
     });
     return;
   }
   const event = {
-    eventName: req.body.event_name,
+    eventName: req.body.eventName,
     dateDate: req.body.date
   };
   Event.create(event)
@@ -28,7 +46,7 @@ exports.createEvent = (req,res) => {
 
 // Delete an event
 exports.deleteEvent = (req,res) => {
-  const eventName = req.body.event_name;
+  const eventName = req.body.eventName;
   const date = req.body.date;
   Event.destroy({
     where: {
