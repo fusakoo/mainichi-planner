@@ -10,12 +10,15 @@ import {
   FaHotTub, FaHome, FaHiking, FaHeart, FaFish, FaDog, FaCat, FaCoffee, FaCity, FaCocktail,
   FaCampground, FaBabyCarriage, FaBicycle, FaBook, FaTrain
 } from 'react-icons/fa';
+import EventsTable from './EventsTable';
 
 class Day extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showFrequency: false
+      showFrequency: false,
+      newEvent: '',
+      newNote: this.props.note
     }
   }
 
@@ -49,6 +52,53 @@ class Day extends React.Component {
     alert('Change saved.');
   }
 
+  eventSubmit = (e) => {
+    e.preventDefault();
+
+    fetch( 'http://localhost:3001/api/event/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        eventName: this.state.newEvent,
+        date: this.props.date_formatted
+      })
+    }).then(response => response.json())
+    .then(data => {
+      if (alert("Event added.")) {
+      } else {
+        window.location.reload();
+      }
+    })
+    .catch(error => {
+      alert(error);
+    });
+  }
+
+  noteSubmit = (e) => {
+    e.preventDefault();
+
+    fetch( 'http://localhost:3001/api/date/note/' + this.props.date_formatted, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        note: this.state.newNote
+      })
+    }).then(response => response.json())
+    .then(data => {
+      if (alert("Note updated.")) {
+      } else {
+        window.location.reload();
+      }
+    })
+    .catch(error => {
+      alert(error);
+    });
+  }
+
   displayFrequency = event => {
     if (event.target.value && typeof event.target.value === "string") {
       if (event.target.value.toLowerCase() === "true") {
@@ -72,7 +122,12 @@ class Day extends React.Component {
           <div className='day-content'>
             <form onSubmit={this.submit}>
               <div>
-                <input type="checkbox" id="important" name="important" value="important"/>
+                <input 
+                  type="checkbox" 
+                  id="important" 
+                  name="important" 
+                  value="important"
+                />
                 <label htmlFor="important" className='bold'>Mark day as important  </label> 
                 <span className='footnote'>(This will add a red box around the date)</span>
               </div>
@@ -131,54 +186,42 @@ class Day extends React.Component {
               </div>
             </form>
             <hr/>
-            <form onSubmit={this.submit}>
+            <form onSubmit={this.eventSubmit}>
               <h2 className='section-header'>Events</h2>
-              <h3 className='subsec-header'>Existing event(s):</h3>
-              <div className='event-list'>
-                <div className='event'>
-                  <span>Test Event 1</span>
-                  <button className='delete-button'>X</button>
-                </div>
-                <div className='event'>
-                  <span>Test Event 2</span>
-                  <button className='delete-button'>X</button>
-                </div>            
-              </div>
+              <EventsTable date_formatted={this.props.date_formatted} events={this.props.events}/>
               <h3 className='subsec-header'>Add new event:</h3>
-              <span className='footnote'>Create a new event by filling out the info below. Recurrence is set to No by default. Click submit to save the new event.</span>
+              <span className='footnote'>Create a new event by filling out the info below.</span>
+              {/* <span className='footnote'>Create a new event by filling out the info below. Recurrence is set to No by default. Click submit to save the new event.</span> */}
               <div>
                 <label htmlFor='event-name'>Event name: </label>
-                <input type='text' id='event-name' name='event-name' maxLength='100' size='50'/>   
-              </div>
-              <div className='recurrence-container'>
-                <div className='radio-button events-radio'>
-                  <h3 className='subsec-header'>Recurring:</h3>
-                  <input type='radio' name='recurring' id='false' value={false} onClick={e => this.displayFrequency(e)} defaultChecked></input>
-                  <label htmlFor='false'>No</label>
-                  <input type='radio' name='recurring' id='true' value={true} onClick={e => this.displayFrequency(e)}></input>
-                  <label htmlFor='true'>Yes</label>
-                </div>
-                {this.state.showFrequency?
-                  <div className='radio-button events-radio frequency-container'>
-                    <h3 className='subsec-header'>Frequency:</h3>
-                    <input type='radio' name='frequency' id='daily' value='daily'></input>
-                    <label htmlFor='daily'>Daily</label>
-                    <input type='radio' name='frequency' id='weekly' value='weekly'></input>
-                    <label htmlFor='weekly'>Weekly</label>
-                    <input type='radio' name='frequency' id='monthly' value='monthly'></input>
-                    <label htmlFor='monthly'>Monthly</label>
-                    <input type='radio' name='frequency' id='yearly' value='yearly'></input>
-                    <label htmlFor='yearly'>Yearly</label>
-                  </div>
-                : null}
+                <input 
+                  value={this.state.newEvent}
+                  onChange={e => this.setState({ newEvent: e.target.value })}
+                  type='text' 
+                  id='event-name' 
+                  name='event-name' 
+                  maxLength='100' 
+                  size='50'
+                />   
               </div>
               <input type="submit" value="Submit" className='submit-button'/>
             </form>
             <hr/>
-            <form onSubmit={this.submit}>
+            <form onSubmit={this.noteSubmit}>
               <h2 className='section-header'>Notes</h2>
-              <span className='footnote'>Write a quick note and click Submit to save.</span>
-              <textarea id='note' name='note' rows='10' cols='20' placeholder='Make any notes here.'></textarea>
+              <h3 className='subsec-header'>Current note</h3>
+              <div className="day-note">{this.props.note}</div>
+              <span className='footnote'>Write a note (max: 255 characters) and click submit to save/update.</span>
+              <textarea 
+                value={this.state.newNote}
+                onChange={e => this.setState({ newNote: e.target.value })}
+                id='note' 
+                name='note' 
+                rows='10' 
+                cols='20'
+                maxLength='254' 
+                placeholder='Make any notes here.'
+              />
               <input type="submit" value="Save" className='submit-button'/>
             </form>
           </div>

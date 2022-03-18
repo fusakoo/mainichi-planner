@@ -1,5 +1,6 @@
 import React from 'react';
-import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
+import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, 
+  endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
 import Day from './Day';
 import Today from './Today';
 
@@ -8,7 +9,12 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       currentMonth: this.props.currentDateTime,
-      selectedDate: new Date()
+      selectedDate: new Date(),
+      date_formatted: format(new Date(), 'yyyy-MM-dd'),
+      note: '',
+      important: false,
+      icons: [],
+      events: []
     };
   } 
 
@@ -108,10 +114,68 @@ class Calendar extends React.Component {
     return <div className='body'>{rows}</div>
   }
   
+  fetchDate = day => {
+    fetch( 'http://localhost:3001/api/date/' + format(day,'yyyy-MM-dd') , {
+      method: 'GET'
+    }).then(response => response.text())
+    .then(data => {
+      var json = JSON.parse(data);
+      this.setState({
+        note: json.note,
+        important: json.important
+      })
+    })
+    .catch(error => {
+      alert(error);
+    });
+  }
+
+  fetchIcons = day => {
+    fetch( 'http://localhost:3001/api/icon/' + format(day,'yyyy-MM-dd') , {
+      method: 'GET'
+    }).then(response => response.text())
+    .then(data => {
+      var json = JSON.parse(data);
+      var icons = []
+      for (var row in json) {
+        icons.push(json[row].iconName)
+      }
+      this.setState({
+        icons: icons
+      })
+    })
+    .catch(error => {
+      alert(error);
+    });
+  }
+
+  fetchEvents = day => {
+    fetch( 'http://localhost:3001/api/event/' + format(day,'yyyy-MM-dd') , {
+      method: 'GET'
+    }).then(response => response.text())
+    .then(data => {
+      var json = JSON.parse(data);
+      var events = []
+      for (var row in json) {
+        events.push(json[row].eventName)
+      }
+      this.setState({
+        events: events
+      })
+    })
+    .catch(error => {
+      alert(error);
+    });
+  }
+
   onDateClick = day => {
     this.setState({
       selectedDate: day,
-    });
+      date_formatted: format(day, 'yyyy-MM-dd')
+    })
+    this.fetchDate(day)
+    this.fetchIcons(day)
+    this.fetchEvents(day)
   }
 
   nextMonth = () => {
@@ -127,8 +191,12 @@ class Calendar extends React.Component {
 
   selectToday = () => {
     this.setState({
-      selectedDate: new Date()
+      selectedDate: new Date(),
+      date_formatted: format(new Date(), 'yyyy-MM-dd')
     });
+    this.fetchDate(new Date())
+    this.fetchIcons(new Date())
+    this.fetchEvents(new Date())
   }
   
   setImportant() {
@@ -151,7 +219,7 @@ class Calendar extends React.Component {
             {this.renderCells()}
           </div>
         </div>
-        {this.props.showSelectedDate? <Day date={this.state.selectedDate}/> : null}
+        {this.props.showSelectedDate? <Day date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} events={this.state.events}/> : null}
       </>
     )
   }

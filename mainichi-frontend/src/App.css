@@ -34,6 +34,8 @@
   --bg-color: #f1f0f0;
   --mainbg-color: #f7f7f7;
   --neutral-color: #fff;
+
+  --notebg-color: rgb(243, 243, 243);
 }
 
 [data-theme='dark'] {
@@ -483,7 +485,7 @@ main {
 }
 
 .subsec-header {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: normal;
   margin-top: 0.5em;
   margin-bottom: 2px;
@@ -581,6 +583,55 @@ main {
   padding: 5px 8px 5px 8px;
   border: none;
   cursor: pointer;
+}
+
+/* Day UI */
+.table-header {
+  font-weight: 400;
+  font-size: 1.1em;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.table {
+  text-align: left;
+}
+
+.event-name {
+  padding-right: 15em;
+}
+
+.column-header {
+  background-color: var(--main-color);
+  font-weight: 500;
+}
+
+.column {
+  padding-left: 0.5em;
+  padding-bottom: 0.2em;
+}
+
+.delete-button {
+  background-color: var(--neutral-color);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: var(--bg-color);
+}
+
+.delete-icon {
+  background: none;
+  padding-left: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.day-note {
+  background: var(--notebg-color);
+  padding: 10px;
+  color: var(--text-color-light);
 }
 
 /* Footer */
