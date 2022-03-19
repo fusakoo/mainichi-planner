@@ -2,8 +2,8 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown'
 
 class Changelog extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
     }
   }

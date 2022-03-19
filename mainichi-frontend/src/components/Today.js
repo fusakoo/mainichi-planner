@@ -48,7 +48,7 @@ class Today extends React.Component {
     const timeZone = this.getDateInfo()[1],
           zonedDate = this.getDateInfo()[2];
 
-    return format(zonedDate, 'hh:mm:ss aa \'GMT\'XXX (z)', { timeZone: timeZone });
+    return format(zonedDate, 'hh:mm:ss aa (\'GMT\'XXX)', { timeZone: timeZone });
   }
 
   render(){

@@ -34,7 +34,6 @@ class App extends React.Component {
     this.displayLog = this.displayLog.bind(this);
     this.displayDay = this.displayDay.bind(this);
     this.hideDay = this.hideDay.bind(this);
-    this.setStartOfWeek = this.setStartOfWeek.bind(this);
     this.switchTheme = this.switchTheme.bind(this);
   } 
 
@@ -102,12 +101,6 @@ class App extends React.Component {
     }));
   }
 
-  setStartOfWeek = dayOfWeek => {
-    this.setState({
-      startOfWeek: dayOfWeek,
-    });
-  }
-
   switchTheme = newTheme => {
     localStorage.setItem('theme', newTheme)
     this.setState({
@@ -128,12 +121,12 @@ class App extends React.Component {
           <Navigation hideDay={this.hideDay}/>
         </header>
         <main>
-          <Calendar displayDay={this.displayDay} showSelectedDate={this.state.showSelectedDate} startOfWeek={this.state.startOfWeek} currentDateTime={this.state.currentDateTime} iana={this.state.iana}/>
+          <Calendar displayDay={this.displayDay} {...this.state}/>
           <div>
             <Routes>
               <Route exact path='/' element={<Home logs={this.state.logs}/>}/>
               <Route path='/help' element={<Help/>}/>
-              <Route path='/setting' element={<Setting setIana={this.setIana} setStartOfWeek={this.setStartOfWeek} currentDateTime={this.state.currentDateTime} switchTheme={this.switchTheme}/>}/>
+              <Route path='/setting' element={<Setting setIana={this.setIana} currentDateTime={this.state.currentDateTime} switchTheme={this.switchTheme}/>}/>
             </Routes>
           </div>
         </main>

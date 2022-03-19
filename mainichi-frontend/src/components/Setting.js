@@ -2,6 +2,9 @@ import React from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
+import SettingColors from './SettingColors';
+import SettingGeneral from './SettingGeneral';
+
 class Setting extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +15,9 @@ class Setting extends React.Component {
       timezones: {},
       themeSelected: 'light'
     };
-    this.updateSelectedTheme = this.updateSelectedTheme.bind(this)
+    this.updateSelectedTheme = this.updateSelectedTheme.bind(this);
+    this.submitTheme = this.submitTheme.bind(this);
+    this.updateTimezone = this.updateTimezone.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +47,7 @@ class Setting extends React.Component {
   submitSetting = (e) => {
     e.preventDefault();
 
-    const { timezone, startOfWeek } = this.state
+    const { timezone } = this.state
 
     confirmAlert({
       title: 'Confirm to apply',
@@ -53,9 +58,7 @@ class Setting extends React.Component {
           onClick: () => {
             alert('Settings applied.');
             let new_iana = this.state.timezones[timezone]
-            this.props.setIana(new_iana);
-              
-            this.props.setStartOfWeek(startOfWeek);
+            this.props.setIana(new_iana);              
           }
         },
         {
@@ -95,6 +98,12 @@ class Setting extends React.Component {
     })
   }
 
+  updateTimezone(e){
+    this.setState({
+      timezone: e.target.value
+    })
+  }
+
   render() {
     const time_options = [];
     for (const[key,value] of Object.entries(this.state.timezones)) {
@@ -107,37 +116,9 @@ class Setting extends React.Component {
           <h1 className='page-header'>Setting</h1>
           <div className='text-content'>
             <h2 className='section-header'>General Setting</h2>
-            <form onSubmit={this.submitSetting}>
-              <span className='footnote'>Select the options you'd like to make the change.</span>
-              <label>Timezone: </label>
-              <select id='timezone' name='timezone' defaultValue='gmt-8' onChange={e => this.setState({timezone: e.target.value})}>
-                <option value={null}></option>
-                {time_options}
-              </select>
-              <input type="submit" value="Submit" className='submit-button'/>
-            </form>
+            <SettingGeneral submitSetting={this.submitSetting} updateTimezone={this.updateTimezone}/>
             <h2 className='section-header'>Customize Theme</h2>
-            <h3 className='subsec-header'>Colors</h3>
-            <form onSubmit={this.submitTheme}>
-              <span className='footnote'>Select the theme color you'd like to apply.</span>
-              <div className='radio-button'>
-                <input type='radio' name='theme' id='light' value='light' defaultChecked onChange={this.updateSelectedTheme}></input>
-                <label htmlFor='default'>Light (Default)</label>
-              </div>
-              <div className='radio-button'>
-                <input type='radio' name='theme' id='dark' value='dark' onChange={this.updateSelectedTheme}></input>
-                <label htmlFor='themeA'>Dark</label>            
-              </div>
-              <div className='radio-button'>
-                <input type='radio' name='theme' id='seafoam' value='seafoam' onChange={this.updateSelectedTheme}></input>
-                <label htmlFor='themeA'>Seafoam</label>            
-              </div>
-              <div className='radio-button'>
-                <input type='radio' name='theme' id='dandelion' value='dandelion' onChange={this.updateSelectedTheme}></input>
-                <label htmlFor='themeA'>Dandelion</label>            
-              </div>
-              <input type="submit" value="Submit" className='submit-button'/>
-            </form>
+            <SettingColors submitTheme={this.submitTheme} updateSelectedTheme={this.updateSelectedTheme}/>
           </div>
         </div>
       </>

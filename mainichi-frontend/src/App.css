@@ -49,6 +49,7 @@
   --mainbg-color: #222222;
   --neutral-color: rgb(14, 14, 14);
 
+  --notebg-color: #222222;
   --highlight-color: #6200ff;
 }
 
@@ -193,6 +194,7 @@ main {
 .footnote {
   font-size: 1em;
   color: var(--text-color-light);
+  margin-bottom: 4px;
 }
 
 /* GRID - CALENDAR */
@@ -421,6 +423,7 @@ main {
   margin: auto;
   color: #fff;
   backdrop-filter: blur(10px);
+  transition: opacity 150ms linear;
 }
 
 .close-button {
@@ -431,7 +434,7 @@ main {
   position: absolute;
   bottom: 1em;
   right: 1em;
-  color: var(--neutral-color);
+  color: var(--highlight-color);
   text-shadow: 1px 3px 3px rgba(0,0,0,0.3);
 }
 
@@ -706,6 +709,7 @@ main {
 
 .day-note {
   background: var(--notebg-color);
+  min-height: 2em;
   border-radius: 0.25rem;
   padding: 10px;
   color: var(--text-color-light);
