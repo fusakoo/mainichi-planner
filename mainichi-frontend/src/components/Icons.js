@@ -81,6 +81,7 @@ class Icons extends React.Component {
       this.addIcon(newIcon)
     })
     alert('Icons saved.')
+    window.location.reload();
   }
 
   render(){

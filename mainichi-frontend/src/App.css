@@ -21,7 +21,6 @@
   font-feature-settings: 'liga';
 }
 
-
 /* VARIABLES */
 
 :root {
@@ -79,7 +78,7 @@
   --mainbg-color: white;
   --neutral-color: #FF9800;
 
-  --highlight-color: #fd3b00;
+  --highlight-color: #ffdc68;
 }
 
 /* GENERAL */
@@ -96,6 +95,7 @@
     color: var(--text-color);
     background: var(--mainbg-color);
     position: relative;
+    height: 100%;
 }
 
 /* HEADER */
@@ -252,6 +252,12 @@ main {
   text-align: center;
   text-decoration: none;
   font-size: 1em;
+  cursor: pointer;
+  transition: .15s ease-out;
+}
+
+.select-today:hover {
+  background: var(--bg-color);
 }
 
 .calendar-container {
@@ -314,7 +320,7 @@ main {
 
 .calendar .body .cell {
   position: relative;
-  height: 5em;
+  height: 6em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
   cursor: pointer;
@@ -328,8 +334,6 @@ main {
 }
 
 .calendar .body .selected {
-  /* border: 2px solid transparent; */
-  /* border-color: rgb(0, 0, 0,0.2); */
   background: var(--bg-color);
   border-image-slice: 1;
 }
@@ -366,10 +370,45 @@ main {
   width: calc(100%/7);
 }
 
+.mini-icon-container {
+  /* position: relative; */
+  font-size: 1.5em;
+  margin-top: .2em;
+  margin-left: .2em;
+  display: grid;
+  grid-template-columns: 1em 1em;
+  grid-template-rows: 1em 1em;
+  overflow: wrap;
+}
+
+.event-count {
+  position: absolute;
+  font-size: 1em;
+  top: 4em;
+  left: 4.3em;
+  background: var(--text-color);
+  color: var(--neutral-color);
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.4em;
+  border-radius: 50%;
+  text-align: center;
+}
+
+@media only screen and (max-width: 790px) {
+  .event-count {
+    left: 3.3em;
+  }
+}
+
+.important-flag {
+  border: solid 2px var(--highlight-color) !important;
+}
+
 /* Change log */
 
 .overlay {
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.8);
   width: 50em;
   height: 50em;
   position: absolute;
@@ -380,7 +419,7 @@ main {
   left: 0;
   right: 0;
   margin: auto;
-  color: var(--neutral-color);
+  color: #fff;
   backdrop-filter: blur(10px);
 }
 
@@ -415,6 +454,11 @@ main {
 .log p, .log li {
   margin-left: 2.2em;
   margin-right: 2em;
+}
+
+.log hr {
+  margin-right: 25px;
+  margin-left: 25px;
 }
 
 /* Content */
@@ -454,13 +498,17 @@ main {
     margin-top: 2em;
     width: 30em;
   }
-}
-
-@media only screen and (max-width: 790px) {
   .day-content {
     width: 30em;
-    margin-top: 39.1em;
+    margin-top: 0em;
+    margin-left: -0.6em;
+  }
+  .day-container {
+    position: absolute;
+    margin-top: 55.2em;
     margin-left: 3.2em;
+    box-shadow: none;
+    width: 30em;
   }
 }
 
@@ -471,10 +519,19 @@ main {
   margin-right: 30px;
 }
 
-.content form .submit-button, .day-content form .submit-button {
+.submit-button {
   margin-top: 1em;
   margin-bottom: 1em;
   cursor: pointer;
+  border: 3px solid var(--main-color);
+  border-radius: 0.5rem;
+  background: var(--main-color);
+  padding: 0.2rem;
+  transition: .5s ease-out;
+}
+
+.submit-button:hover {
+  color: var(--neutral-color);
 }
 
 .page-header {
@@ -486,14 +543,14 @@ main {
 
 .section-header {
   font-size: 1.5em;
-  font-weight: normal;
+  font-weight: bold;
   margin-top: 1em;
   margin-bottom: 5px;
 }
 
 .subsec-header {
   font-size: 1.1em;
-  font-weight: normal;
+  font-weight: bold;
   margin-top: 0.5em;
   margin-bottom: 2px;
 }
@@ -555,9 +612,16 @@ main {
 
 .icon-list {
   border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
   padding: 2px;
   height: 7em;
   overflow: wrap;
+}
+
+@media only screen and (max-width: 790px) {
+  .icon-list {
+    height: 9em;
+  }
 }
 
 .icon {
@@ -633,6 +697,8 @@ main {
 
 .delete-icon {
   background: none;
+  color: var(--text-color);
+  line-height: 2em;
   padding-left: 40px;
   border: none;
   cursor: pointer;
@@ -640,15 +706,62 @@ main {
 
 .day-note {
   background: var(--notebg-color);
+  border-radius: 0.25rem;
   padding: 10px;
   color: var(--text-color-light);
+}
+
+.importance-container {
+  margin-left: 30px;
+}
+
+.importance-check {
+  margin-right: 10px;
+  margin-left: -5px;
+}
+
+.text-input {
+  height: 2em;
+}
+
+.text-input, .note-input {
+  background: var(--mainbg-color);
+  border-radius: 0.25rem;
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  padding: .5em;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.text-input:focus, .note-input:focus {
+  border-color: var(--bg-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem var(--sub-color);
+}
+
+/* HELP */
+
+.less-margin {
+  margin-left: -2em;
+  padding-right: 1.4em;
+}
+
+.help-list {
+  margin-top: .2em;
+  margin-bottom: .2em;
+}
+
+.image {
+  max-width: 80%;
+  margin-left: 3em;
+  margin-top: .5em;
 }
 
 /* Footer */
 
 footer {
   text-align: center;
-  padding-bottom: 0.5em;
+  padding-bottom: 8em;
 }
 
 footer a {

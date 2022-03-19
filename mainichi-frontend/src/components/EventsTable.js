@@ -35,7 +35,7 @@ class EventsTable extends React.Component {
   render () {
     return (    
       <table className="table-container">
-        <caption className="table-header">Existing Event(s):</caption>
+        <caption className="table-header">Existing Event(s)</caption>
         <thead className="table">
           <tr>
             <th className="column event-name column-header">Name</th>

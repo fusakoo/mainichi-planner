@@ -3,38 +3,39 @@ import { format } from 'date-fns';
 import EventsTable from './EventsTable';
 import Icons from './Icons';
 
-class Day extends React.Component {
+class DayUI extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showFrequency: false,
       newEvent: '',
-      newNote: this.props.note
+      newNote: this.props.note,
+      newImportance: false
     }
   }
 
-  // importanceSubmit = (e) => {
-  //   e.preventDefault();
+  importanceSubmit = (e) => {
+    e.preventDefault();
 
-  //   fetch( 'http://localhost:3001/api/date/important/' + this.props.date_formatted, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       important: !this.props.important
-  //     })
-  //   }).then(response => response.json())
-  //   .then(data => {
-  //     if (alert("Note updated.")) {
-  //     } else {
-  //       window.location.reload();
-  //     }
-  //   })
-  //   .catch(error => {
-  //     alert(error);
-  //   });
-  // }
+    fetch( 'http://localhost:3001/api/date/important/' + this.props.date_formatted, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        important: (this.state.newImportance==='true')? true:false
+      })
+    }).then(response => response.json())
+    .then(data => {
+      if (alert("Importance updated.")) {
+      } else {
+        window.location.reload();
+      }
+    })
+    .catch(error => {
+      alert(error);
+    });
+  }
 
   eventSubmit = (e) => {
     e.preventDefault();
@@ -89,17 +90,30 @@ class Day extends React.Component {
         <div className='day-container'>
           <h1 className='page-header'>{format(this.props.date, 'MMMM dd, yyyy (EEEE)')}</h1>
           <div className='day-content'>
-            {/* <div>
-              <input 
-                type="checkbox" 
-                id="important" 
-                name="important" 
-                value="important"
-                onChange={()=> this.importanceSubmit}
+            <form className='importance-container' onSubmit={this.importanceSubmit}>
+              <span className='importance-check'>
+                <input 
+                  type='radio' 
+                  name='important' 
+                  id='important' 
+                  value={true}
+                  onChange={e => this.setState({ newImportance: e.target.value })}
                 />
-              <label htmlFor="important" className='bold'>Mark day as important  </label> 
+                <label htmlFor='default'>Yes</label>
+                <input 
+                  type='radio' 
+                  name='important' 
+                  id='important' 
+                  value={false} 
+                  onChange={e => this.setState({ newImportance: e.target.value })}
+                />
+                <label htmlFor='default'>No</label>
+              </span>
+              <label htmlFor="important" className='bold'>Mark day as important  </label>
+              <br/>
               <span className='footnote'>(This will add a box around the date)</span>
-            </div> */}
+              <input type="submit" value="Submit" className='submit-button'/>
+            </form>
             <Icons updateIcons={this.props.updateIcons} icons={this.props.icons} selectedIcons={this.props.selectedIcons} date_formatted={this.props.date_formatted}/>
             <hr/>
             <form onSubmit={this.eventSubmit}>
@@ -111,6 +125,7 @@ class Day extends React.Component {
               <div>
                 <label htmlFor='event-name'>Event name: </label>
                 <input 
+                  className='text-input'
                   value={this.state.newEvent}
                   onChange={e => this.setState({ newEvent: e.target.value })}
                   type='text' 
@@ -118,6 +133,7 @@ class Day extends React.Component {
                   name='event-name' 
                   maxLength='100' 
                   size='50'
+                  required
                 />   
               </div>
               <input type="submit" value="Submit" className='submit-button'/>
@@ -129,6 +145,7 @@ class Day extends React.Component {
               <div className="day-note">{this.props.note}</div>
               <span className='footnote'>Write a note (max: 255 characters) and click submit to save/update.</span>
               <textarea 
+                className='note-input'
                 value={this.state.newNote}
                 onChange={e => this.setState({ newNote: e.target.value })}
                 id='note' 
@@ -147,4 +164,4 @@ class Day extends React.Component {
   }
 }
 
-export default Day;
+export default DayUI;

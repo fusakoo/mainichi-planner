@@ -5,7 +5,6 @@ require("dotenv").config();
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
   dialect: process.env.DB_DIALECT,
-  // operatorsAliases: false,
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
@@ -21,6 +20,7 @@ db.date = require("./date.model.js")(sequelize, Sequelize);
 db.event = require("./event.model.js")(sequelize, Sequelize);
 db.icon = require("./icon.model.js")(sequelize, Sequelize);
 db.dateIcon = require("./dateIcon.model.js")(sequelize, Sequelize);
+
 // M:M Date and Icon
 db.icon.belongsToMany(db.date, {
   through: "dateIcons",

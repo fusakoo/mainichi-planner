@@ -8,7 +8,7 @@ module.exports = app => {
   router.get("/:date", date.findDate);
   // Update the note of date
   router.put("/note/:date", date.updateNote);
-  // Delete the importance of date
+  // Update the importance of date
   router.put("/important/:date", date.updateImportant);
   app.use('/api/date', router);
 };

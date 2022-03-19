@@ -12,7 +12,6 @@ class Setting extends React.Component {
       timezones: {},
       themeSelected: 'light'
     };
-
     this.updateSelectedTheme = this.updateSelectedTheme.bind(this)
   }
 
@@ -110,25 +109,6 @@ class Setting extends React.Component {
             <h2 className='section-header'>General Setting</h2>
             <form onSubmit={this.submitSetting}>
               <span className='footnote'>Select the options you'd like to make the change.</span>
-              {/* <label>Font Size: </label>
-              <select id='font-size' name='font-size' defaultValue='medium'>
-                <option value='small'>Small</option>
-                <option value='medium'>Medium (Default)</option>
-                <option value='large'>Large</option>
-              </select> */}
-              {/* <label>Start of the Week: </label>
-              <select id='start-of-week' name='start-of-week' defaultValue='sunday' onChange={e=> this.setState({startOfWeek: e.target.value})}>
-                <option value='sunday'>Sunday (Default)</option>
-                <option value='monday'>Monday</option>
-              </select> */}
-              {/* <label>Date highlight color: </label>
-              <select id='highlight' name='highlight' defaultValue='default'>
-                <option value='default'>Default</option>
-                <option value='red'>Red</option>
-                <option value='blue'>Blue</option>
-                <option value='green'>Green</option>
-                <option value='black'>Black</option>
-              </select> */}
               <label>Timezone: </label>
               <select id='timezone' name='timezone' defaultValue='gmt-8' onChange={e => this.setState({timezone: e.target.value})}>
                 <option value={null}></option>
@@ -156,14 +136,6 @@ class Setting extends React.Component {
                 <input type='radio' name='theme' id='dandelion' value='dandelion' onChange={this.updateSelectedTheme}></input>
                 <label htmlFor='themeA'>Dandelion</label>            
               </div>
-              {/* <div className='radio-button'>
-                <input type='radio' name='theme' id='themeB' value='themeB'></input>
-                <label htmlFor='themeB'>theme B</label>            
-              </div>
-              <div className='radio-button'>
-                <input type='radio' name='theme' id='themeC' value='themeC'></input>
-                <label htmlFor='themeC'>Theme C</label>            
-              </div> */}
               <input type="submit" value="Submit" className='submit-button'/>
             </form>
           </div>

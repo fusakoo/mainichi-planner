@@ -1,5 +1,5 @@
 import React from 'react';
-
+import day_image from '../images/dayUI_screenshot.png';
 
 function Help() {
   return (
@@ -17,8 +17,16 @@ function Help() {
           <p>
             First you will be greeted with the Home page. Home page is where it contains
             the general overview of the app, how to start using it, and introduction
-            to the latest feature available on this app. Visit anytime by clicking the "Home"
-            link at the top.
+            to the latest feature available on this app. 
+          </p>
+          <p>
+            Visit anytime by clicking the "Home" link at the top.
+          </p>
+          <h3 className='subsec-header'>Day UI</h3>
+          <img src={day_image} alt="Day UI image" className='image'/>
+          <p>
+            This is the page where you may see when you click on a day. Various customization
+            for the day are available (e.g., importance indicator, icons, events, notes).
           </p>
           <h3 className='subsec-header'>Help Page</h3>
           <p>
@@ -29,20 +37,30 @@ function Help() {
           <h3 className='subsec-header'>Setting Page</h3>
           <p>
             Page that allows you to customize some of the the features on the web app. 
-            Adjust your timezone or highlight colors, select your favorite color theme,
-            and import/export data so you have it ready just in case.
+            Currently you can ddjust your timezone and select your favorite color theme,
           </p>
           <hr/>  
           <h2 className='section-header'>Q&A</h2>
           <p>Commonly asked questions will be listed here.</p>
           <ul>
-            <li>Question 1</li>
+            <li className='help-list'>What is the black circle on each of the day mean?</li>
             <ul>
-              <li>Answer</li>
+              <li className='less-margin'>The black circle with a number reflects the number of events for that day.</li>
             </ul>
-            <li>Question 2</li>
+            <li className='help-list'>How come I can't select more than 4 icons per day?</li>
             <ul>
-              <li>Answer</li>
+              <li className='less-margin'>That's currently something in the works, but I found this to be the optimal number for the time being.</li>
+              <li className='less-margin'>Limits may be increased if better UI is implemented and/or demand is high!</li>
+            </ul>
+            <li className='help-list'>How did you create this web app?</li>
+            <ul>
+              <li className='less-margin'>Lots of coffee and sleepless nights.</li>
+              <li className='less-margin'>It's built with React, Node.js, Express, MySQL. Icons are material icons.</li>
+              <li className='less-margin'>Microservice is using Python and Flask. It's available on Heroku.</li>
+            </ul>
+            <li className='help-list'>Where can I submit a feedback?</li>
+            <ul>
+              <li className='less-margin'>Look below for best way to reach out to the creator.</li>
             </ul>
           </ul>
           <hr/>  
@@ -50,7 +68,7 @@ function Help() {
           <p>
             For any feedback/suggestion/etc., please feel free raise an issue to 
             this project's <a href = "https://github.com/fusakoo/mainichi-planner/issues"> Github</a>.
-            Thank you for your support!
+            Thank you for your support! With love, Fusako.
           </p>
         </div>
       </div>

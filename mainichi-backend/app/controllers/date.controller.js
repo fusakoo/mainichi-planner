@@ -9,7 +9,6 @@ exports.createDate = (req,res) => {
     });
     return;
   }
-  // Create Date
   const date = {
     date: req.body.date
   };
@@ -30,11 +29,9 @@ exports.findDate = (req,res) => {
   const date = req.params.date;
   Date.findByPk(date)
   .then(data => {
-    // If it exists, return the data
     if(data) {
       res.send(data);
     } else {
-      // Create the date if it doesn't exist in the DB
       const newDate = {
         date: req.params.date
       }

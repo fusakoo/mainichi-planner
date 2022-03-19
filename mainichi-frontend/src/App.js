@@ -8,11 +8,13 @@ import Help from './components/Help';
 import Setting from './components/Setting';
 import ChangeLog from './components/ChangeLog';
 import IconList from './components/IconList';
+import logPath from './CHANGELOG.md';
 
 import { Route, Routes } from 'react-router-dom';
 import { addSeconds } from 'date-fns';
 
 import './App.css';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -22,9 +24,10 @@ class App extends React.Component {
       showSelectedDate: false,
       startOfWeek: 'sunday',
       currentDateTime: new Date(),
-      iana: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      theme: 'light',
-      dataIsLoaded: false
+      iana: localStorage.getItem('iana') || Intl.DateTimeFormat().resolvedOptions().timeZone,
+      theme: localStorage.getItem('theme') || 'light',
+      dataIsLoaded: false,
+      logs: null
     };
 
     this.setIana = this.setIana.bind(this);
@@ -43,11 +46,23 @@ class App extends React.Component {
     }, 1000)
     // Load the icon data to database
     if(this.state.dataIsLoaded === false){
+      this.loadLogs()
       this.loadIcons(IconList)
       this.setState({
         dataIsLoaded: !this.state.dataIsLoaded
       })
     }
+  }
+
+  loadLogs() {
+    fetch(logPath)
+    .then(response => response.text())
+    .then((text) => {
+      console.log(text)
+      this.setState({
+        logs: text
+      })
+    })
   }
 
   loadIcons = IconList => {
@@ -63,6 +78,7 @@ class App extends React.Component {
   }
 
   setIana = newIana => {
+    localStorage.setItem('iana', newIana)
     this.setState({
       iana: newIana,
     });
@@ -93,6 +109,7 @@ class App extends React.Component {
   }
 
   switchTheme = newTheme => {
+    localStorage.setItem('theme', newTheme)
     this.setState({
       theme: newTheme,
     })
@@ -114,7 +131,7 @@ class App extends React.Component {
           <Calendar displayDay={this.displayDay} showSelectedDate={this.state.showSelectedDate} startOfWeek={this.state.startOfWeek} currentDateTime={this.state.currentDateTime} iana={this.state.iana}/>
           <div>
             <Routes>
-              <Route exact path='/' element={<Home/>}/>
+              <Route exact path='/' element={<Home logs={this.state.logs}/>}/>
               <Route path='/help' element={<Help/>}/>
               <Route path='/setting' element={<Setting setIana={this.setIana} setStartOfWeek={this.setStartOfWeek} currentDateTime={this.state.currentDateTime} switchTheme={this.switchTheme}/>}/>
             </Routes>
@@ -123,7 +140,7 @@ class App extends React.Component {
         <footer>
             <span>Created by <a href='https://github.com/fusakoo' target='_blank' rel='noreferrer'><FaGithub /> fusakoo</a> | </span>
             <button className='link-button' onClick={this.displayLog}>Change Log</button>
-            { this.state.showLog ? <ChangeLog displayLog = {this.displayLog}/> : null }
+            { this.state.showLog ? <ChangeLog displayLog = {this.displayLog} logs={this.state.logs}/> : null }
         </footer>
       </div>
     );
