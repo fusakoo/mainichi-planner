@@ -1,3 +1,4 @@
+// Database config parameters
 module.exports = {
   pool: {
     max: 5,

@@ -19,7 +19,6 @@ exports.findAll = (req, res) => {
   });
 }
 
-
 // Create an Event
 exports.createEvent = (req,res) => {
   if (!req.body.eventName) {

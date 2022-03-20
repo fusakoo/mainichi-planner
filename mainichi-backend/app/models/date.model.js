@@ -1,4 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
+  // Defines the dates table
   const Date = sequelize.define("date", {
     date: {
       type: Sequelize.DATEONLY,

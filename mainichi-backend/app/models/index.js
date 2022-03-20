@@ -16,23 +16,23 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
+// Initializes each table
 db.date = require("./date.model.js")(sequelize, Sequelize);
 db.event = require("./event.model.js")(sequelize, Sequelize);
 db.icon = require("./icon.model.js")(sequelize, Sequelize);
 db.dateIcon = require("./dateIcon.model.js")(sequelize, Sequelize);
 
-// M:M Date and Icon
+// M:M dates and icons
 db.icon.belongsToMany(db.date, {
   through: "dateIcons",
-  // as: "icons",
   foreignKey: "iconName"
 });
 db.date.belongsToMany(db.icon, {
   through: "dateIcons",
-  // as: "date_icons",
   foreignKey: "date"
 });
-// O:M Date and Event
+// O:M dates and events
 db.event.belongsTo(db.date);
 db.date.hasMany(db.event, {
   as: "events"
