@@ -10,17 +10,18 @@ class Changelog extends React.Component {
 
   render(){
     return (
-      <>
-        <div className='overlay'>
-          <h1 className='page-header'>Change Log</h1>
-          <button className='close-button' onClick={this.props.displayLog}>Close X</button>
-          <div className='logs'>
-            <div className='log'>
-              <ReactMarkdown children={this.props.logs}/>
-            </div>
+      <div className='overlay'>
+        <h1 className='page-header'>Change Log</h1>
+        <button 
+          className='close-button' 
+          onClick={this.props.displayLog}
+        >Close X</button>
+        <div className='logs'>
+          <div className='log'>
+            <ReactMarkdown children={this.props.logs}/>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

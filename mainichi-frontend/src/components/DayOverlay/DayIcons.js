@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconList from './IconList';
+import IconList from '../IconList';
 
 class DayIcons extends React.Component {
   constructor(props) {

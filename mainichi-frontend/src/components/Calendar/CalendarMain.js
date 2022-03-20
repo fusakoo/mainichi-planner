@@ -106,8 +106,13 @@ class CalendarMain extends React.Component {
                onClick = { () => {this.onDateClick(cloneDay); this.displayDayUI()}}        
             >
               <span className='number'>{(formattedDate)}</span>
-              {isSameDay(day, selectedDate)? <span className='event-count'>{(this.props.events.length > 0)? this.props.events.length:''}</span>:''}
-              {isSameDay(day, selectedDate)? this.renderIcons():''}
+              {isSameDay(day, selectedDate)
+                ? <span className='event-count'>{(this.props.events.length > 0)
+                ? this.props.events.length:''}</span> : ''
+              }
+              {isSameDay(day, selectedDate)
+                ? this.renderIcons() : ''
+              }
           </div>
         );
         day = addDays(day, 1);

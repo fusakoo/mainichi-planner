@@ -40,27 +40,27 @@ class Today extends React.Component {
 
   renderDate() {
     const zonedDate = this.getDateInfo()[2];
+    const dateFormat = 'EEEE, MMMM dd, yyyy';
 
-    return format(zonedDate, 'EEEE, MMMM dd, yyyy');
+    return format(zonedDate, dateFormat);
   }
 
   renderTime() {
     const timeZone = this.getDateInfo()[1],
           zonedDate = this.getDateInfo()[2];
+    const timeFormat = 'hh:mm:ss aa (zzzz)';
 
-    return format(zonedDate, 'hh:mm:ss aa (\'GMT\'XXX)', { timeZone: timeZone });
+    return format(zonedDate, timeFormat, { timeZone: timeZone });
   }
 
   render(){
     return (
-      <>
-        <div className='today-info'>
-          {this.greeting()}
-          <p>
-            Today is {this.renderDate()}. Time is currently {this.renderTime()}.
-          </p>
-        </div>
-      </>
+      <div className='today-info'>
+        {this.greeting()}
+        <p>
+          Today is {this.renderDate()}. Time is currently {this.renderTime()}.
+        </p>
+      </div>
     );
   }
 }

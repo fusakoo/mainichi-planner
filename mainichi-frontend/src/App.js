@@ -1,22 +1,22 @@
 import React from 'react';
-import Calendar from './components/Calendar';
-import Navigation from './components/Navigation';
-import { FaGithub } from 'react-icons/fa';
+import './App.css';
 
-import Home from './components/Home';
-import Help from './components/Help';
-import Setting from './components/Setting';
-import ChangeLog from './components/ChangeLog';
+import Home from './pages/Home';
+import Help from './pages/Help';
+import Setting from './pages/Setting';
+
+import Calendar from './components/Calendar/Calendar';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 import IconList from './components/IconList';
 
 import logPath from './markdown/changelog.md';
 import qaPath from './markdown/qa.md';
+import feedbackPath from './markdown/feedback.md';
 
 import { Route, Routes } from 'react-router-dom';
 import { addSeconds } from 'date-fns';
-
-import './App.css';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +30,8 @@ class App extends React.Component {
       theme: localStorage.getItem('theme') || 'light',
       dataIsLoaded: false,
       logs: null,
-      qaText: null
+      qaText: null,
+      feedbackText: null
     };
 
     this.setIana = this.setIana.bind(this);
@@ -50,6 +51,7 @@ class App extends React.Component {
     if(this.state.dataIsLoaded === false){
       this.loadLogs()
       this.loadQA()
+      this.loadFeedback()
       this.loadIcons(IconList)
       this.setState({
         dataIsLoaded: !this.state.dataIsLoaded
@@ -63,6 +65,16 @@ class App extends React.Component {
     .then((text) => {
       this.setState({
         qaText: text
+      })
+    })
+  }
+
+  loadFeedback() {
+    fetch(feedbackPath)
+    .then(response => response.text())
+    .then((text) => {
+      this.setState({
+        feedbackText: text
       })
     })
   }
@@ -124,28 +136,42 @@ class App extends React.Component {
   render() {
     return (
       <div className='app' data-theme={this.state.theme}>
-        <header>
-          <div id='logo'>
-            <span className='material-icon'>event</span>
-            <span>Mainichi Planner</span>
-          </div>
-          <Navigation hideDayUI={this.hideDayUI}/>
-        </header>
+        <Header hideDayUI={this.hideDayUI}/>
         <main>
-          <Calendar displayDayUI={this.displayDayUI} {...this.state}/>
+          <Calendar 
+            displayDayUI={this.displayDayUI} 
+            {...this.state}
+          />
           <div>
             <Routes>
-              <Route exact path='/' element={<Home logs={this.state.logs}/>}/>
-              <Route path='/help' element={<Help qaText={this.state.qaText}/>}/>
-              <Route path='/setting' element={<Setting setIana={this.setIana} currentDateTime={this.state.currentDateTime} switchTheme={this.switchTheme}/>}/>
+              <Route 
+                exact 
+                path='/' 
+                element={<Home logs={this.state.logs}/>}
+              />
+              <Route 
+                path='/help' 
+                element={
+                  <Help 
+                    qaText={this.state.qaText} 
+                    feedbackText={this.state.feedbackText}
+                  />
+                }
+              />
+              <Route 
+                path='/setting' 
+                element={<Setting setIana={this.setIana} 
+                currentDateTime={this.state.currentDateTime} 
+                switchTheme={this.switchTheme}/>}
+              />
             </Routes>
           </div>
         </main>
-        <footer>
-            <span>Created by <a href='https://github.com/fusakoo' target='_blank' rel='noreferrer'><FaGithub /> fusakoo</a> | </span>
-            <button className='link-button' onClick={this.displayLog}>Change Log</button>
-            { this.state.showLog ? <ChangeLog displayLog = {this.displayLog} logs={this.state.logs}/> : null }
-        </footer>
+        <Footer 
+          displayLog={this.displayLog} 
+          showLog={this.state.showLog} 
+          logs={this.state.logs}
+        />
       </div>
     );
   }

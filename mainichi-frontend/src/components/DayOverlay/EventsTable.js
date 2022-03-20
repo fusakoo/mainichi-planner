@@ -45,7 +45,12 @@ class EventsTable extends React.Component {
             return ( 
               <tr className='list-item'>
                 <td className='column'>{event}</td>
-                <td className='column delete-button'><button onClick={() => this.HandleDelete(event,this.props.date_formatted)} className='delete-icon'>X</button></td>
+                <td className='column delete-button'>
+                  <button 
+                    onClick={() => this.HandleDelete(event,this.props.date_formatted)} 
+                    className='delete-icon'
+                  >X</button>
+                </td>
               </tr>
             )}
           )}

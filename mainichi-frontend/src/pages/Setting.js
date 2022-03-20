@@ -2,8 +2,8 @@ import React from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-import SettingColors from './SettingColors';
-import SettingGeneral from './SettingGeneral';
+import SettingColors from '../components/SettingPage/SettingColors';
+import SettingGeneral from '../components/SettingPage/SettingGeneral';
 
 class Setting extends React.Component {
   constructor(props) {
@@ -105,23 +105,22 @@ class Setting extends React.Component {
   }
 
   render() {
-    const time_options = [];
-    for (const[key,value] of Object.entries(this.state.timezones)) {
-      time_options.push(<option value={key}>{key}</option>)
-    }
-
     return (
-      <>
-        <div className='content'>
-          <h1 className='page-header'>Setting</h1>
-          <div className='text-content'>
-            <h2 className='section-header'>General Setting</h2>
-            <SettingGeneral submitSetting={this.submitSetting} updateTimezone={this.updateTimezone}/>
-            <h2 className='section-header'>Customize Theme</h2>
-            <SettingColors submitTheme={this.submitTheme} updateSelectedTheme={this.updateSelectedTheme}/>
-          </div>
+      <div className='content'>
+        <h1 className='page-header'>Setting</h1>
+        <div className='text-content'>
+          <h2 className='section-header'>General Setting</h2>
+          <SettingGeneral 
+            submitSetting={this.submitSetting} 
+            updateTimezone={this.updateTimezone}
+          />
+          <h2 className='section-header'>Customize Theme</h2>
+          <SettingColors 
+            submitTheme={this.submitTheme} 
+            updateSelectedTheme={this.updateSelectedTheme}
+          />
         </div>
-      </>
+      </div>
     );
   }
 }

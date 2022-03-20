@@ -36,7 +36,10 @@ class DayEvents extends React.Component {
     return (
       <form onSubmit={this.eventSubmit}>
         <h2 className='section-header'>Events</h2>
-        <EventsTable date_formatted={this.props.date_formatted} events={this.props.events}/>
+        <EventsTable 
+          date_formatted={this.props.date_formatted} 
+          events={this.props.events}
+          />
         <h3 className='subsec-header'>Add new event:</h3>
         <span className='footnote'>Create a new event by filling out the info below.</span>
         <div>

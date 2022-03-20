@@ -34,7 +34,7 @@ class SettingGeneral extends React.Component {
 
   render(){
     const time_options = [];
-    for (const[key,value] of Object.entries(this.state.timezones)) {
+    for (const[key] of Object.entries(this.state.timezones)) {
       time_options.push(<option value={key}>{key}</option>)
     }
 
@@ -43,7 +43,12 @@ class SettingGeneral extends React.Component {
         <span className='footnote'>Select the options you'd like to make the change.</span>
         <label className='subsec-header'>Timezone </label>
         <span className='footnote'>Select a timezone to change the displayed time (and greeting).</span>
-        <select id='timezone' name='timezone' defaultValue='gmt-8' onChange={this.props.updateTimezone}>
+        <select 
+          id='timezone' 
+          name='timezone' 
+          defaultValue='gmt-8' 
+          onChange={this.props.updateTimezone}
+        >
           <option value={null}></option>
           {time_options}
         </select>

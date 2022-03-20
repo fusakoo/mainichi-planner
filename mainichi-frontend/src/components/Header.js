@@ -1,20 +1,24 @@
 import React from 'react';
 import Navigation from './Navigation';
 
-function Header() {
-  return (
-    <>
+class Header extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+    }
+  }
+
+  render(){
+    return (
       <header>
         <div id='logo'>
           <span className='material-icon'>event</span>
-          <span>
-            Mainichi Planner
-          </span>
+          <span>Mainichi Planner</span>
         </div>
-        <Navigation/>
+        <Navigation hideDayUI={this.props.hideDayUI}/>
       </header>
-    </>
-  );
+    );
+  }
 }
 
 export default Header;

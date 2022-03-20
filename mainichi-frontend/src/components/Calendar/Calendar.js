@@ -1,7 +1,7 @@
 import React from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
-import DayUI from './DayUI';
-import DayOverview from './DayOverview';
+import DayUI from '../DayOverlay/DayUI';
+import DayOverview from '../DayOverlay/DayOverview';
 import CalendarMain from './CalendarMain';
 
 class Calendar extends React.Component {
@@ -157,13 +157,38 @@ class Calendar extends React.Component {
     return (
       <>
         <div className='calendar-container'>
-          <DayOverview currentDateTime={this.props.currentDateTime} iana={this.props.iana}/>
+          <DayOverview 
+            currentDateTime={this.props.currentDateTime} 
+            iana={this.props.iana}
+          />
           <div>
-            <button className='select-today' onClick={() => {this.selectToday(); this.displayDayUI()}}>Today</button>
+            <button 
+              className='select-today' 
+              onClick={() => {this.selectToday(); this.displayDayUI()}}
+            >Today</button>
           </div>
-          <CalendarMain displayDayUI={this.displayDayUI} onDateClick={this.onDateClick} nextMonth={this.nextMonth} prevMonth={this.prevMonth} startOfWeek={this.props.startOfWeek} {...this.state}/>
+          <CalendarMain 
+            displayDayUI={this.displayDayUI} 
+            onDateClick={this.onDateClick} 
+            nextMonth={this.nextMonth} 
+            prevMonth={this.prevMonth} 
+            startOfWeek={this.props.startOfWeek} 
+            {...this.state}
+          />
         </div>
-        {this.props.showSelectedDate? <DayUI updateIcons={this.updateIcons} {...this.state} date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} selectedIcons={this.state.selectedIcons} events={this.state.events}/> : ''}
+        {this.props.showSelectedDate
+          ? <DayUI 
+              updateIcons={this.updateIcons} 
+              // Cannot use {...this.state} to shorten here as it causes some mounting issue
+              date={this.state.selectedDate} 
+              date_formatted={this.state.date_formatted} 
+              note={this.state.note} 
+              important={this.state.important} 
+              icons={this.state.icons} 
+              selectedIcons={this.state.selectedIcons} 
+              events={this.state.events}
+            /> 
+          : ''}
       </>
     )
   }
