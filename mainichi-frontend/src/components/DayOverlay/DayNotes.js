@@ -10,7 +10,7 @@ class DayNotes extends React.Component {
   noteSubmit = (e) => {
     e.preventDefault();
 
-    fetch( 'http://localhost:3001/api/date/note/' + this.props.date_formatted, {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/date/note/' + this.props.date_formatted, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

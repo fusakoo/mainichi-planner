@@ -10,7 +10,7 @@ class DayImportant extends React.Component {
   importanceSubmit = (e) => {
     e.preventDefault();
 
-    fetch( 'http://localhost:3001/api/date/important/' + this.props.date_formatted, {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/date/important/' + this.props.date_formatted, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

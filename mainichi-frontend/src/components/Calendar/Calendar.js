@@ -40,7 +40,7 @@ class Calendar extends React.Component {
   }
   
   fetchDate = day => {
-    fetch( 'http://localhost:3001/api/date/' + format(day,'yyyy-MM-dd') , {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/date/' + format(day,'yyyy-MM-dd') , {
       method: 'GET'
     }).then(response => response.text())
     .then(data => {
@@ -56,7 +56,7 @@ class Calendar extends React.Component {
   }
 
   fetchIcons = day => {
-    fetch( 'http://localhost:3001/api/icon/' + format(day,'yyyy-MM-dd') , {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/icon/' + format(day,'yyyy-MM-dd') , {
       method: 'GET'
     }).then(response => response.text())
     .then(data => {
@@ -76,7 +76,7 @@ class Calendar extends React.Component {
   }
 
   fetchEvents = day => {
-    fetch( 'http://localhost:3001/api/event/' + format(day,'yyyy-MM-dd') , {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/event/' + format(day,'yyyy-MM-dd') , {
       method: 'GET'
     }).then(response => response.text())
     .then(data => {

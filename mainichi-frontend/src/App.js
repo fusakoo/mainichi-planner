@@ -91,7 +91,7 @@ class App extends React.Component {
 
   loadIcons = IconList => {
     for (var i in IconList) {
-      fetch( 'http://localhost:3001/api/icon/' + IconList[i], {
+      fetch( process.env.REACT_APP_BACKEND_URL + '/api/icon/' + IconList[i], {
         method: 'POST'
       })
       .then(response => response.json())

@@ -39,7 +39,7 @@ class DayIcons extends React.Component {
   }
 
   addIcon = icon => {
-    fetch( 'http://localhost:3001/api/icon/', {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/icon/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

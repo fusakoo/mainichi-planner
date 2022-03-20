@@ -11,7 +11,7 @@ class DayEvents extends React.Component {
   eventSubmit = (e) => {
     e.preventDefault();
 
-    fetch( 'http://localhost:3001/api/event/', {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/event/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

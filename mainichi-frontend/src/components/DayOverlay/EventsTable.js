@@ -9,7 +9,7 @@ class EventsTable extends React.Component {
   }
 
   HandleDelete = (eventName,date) => {
-    fetch( 'http://localhost:3001/api/event/' , {
+    fetch( process.env.REACT_APP_BACKEND_URL + '/api/event/' , {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
