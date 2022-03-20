@@ -2,11 +2,10 @@ import React from 'react';
 
 import IconList from './IconList';
 
-class Icons extends React.Component {
+class DayIcons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // selectedIcons: this.props.icons
     }
   }
 
@@ -19,9 +18,9 @@ class Icons extends React.Component {
   }
 
   renderIcons() {
-    let icons = []
+    let icons = [];
     for(var i in IconList) {
-      let iconName = IconList[i]
+      let iconName = IconList[i];
       icons.push(
         <span className = {
           `icon material-icons
@@ -75,12 +74,12 @@ class Icons extends React.Component {
     e.preventDefault();
 
     this.props.icons.forEach((oldIcon) => {
-      this.dropIcon(oldIcon)
+      this.dropIcon(oldIcon);
     })
     this.props.selectedIcons.forEach((newIcon) => {
-      this.addIcon(newIcon)
+      this.addIcon(newIcon);
     })
-    alert('Icons saved.')
+    alert('Icons saved.');
     window.location.reload();
   }
 
@@ -92,10 +91,10 @@ class Icons extends React.Component {
         <div className='icon-list'>
           <div className='icon-list'>{this.renderIcons()}</div>
         </div>
-        <input type="submit" value="Submit" className='submit-button'/>
+        <input type='submit' value='Submit' className='submit-button'/>
       </form>
     );
   }
 }
 
-export default Icons;
+export default DayIcons;

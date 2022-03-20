@@ -1,5 +1,5 @@
 import React from 'react';
-import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, 
+import { format, addDays, startOfWeek, startOfMonth, 
   endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
 
 class CalendarMain extends React.Component {
@@ -62,11 +62,11 @@ class CalendarMain extends React.Component {
   }
 
   onDateClick = day => {
-    this.props.onDateClick(day)
+    this.props.onDateClick(day);
   }
 
-  displayDay = () => {
-    this.props.displayDay()
+  displayDayUI = () => {
+    this.props.displayDayUI();
   }  
 
   renderCells() {
@@ -103,7 +103,7 @@ class CalendarMain extends React.Component {
                 }
                 `}
                key = {day}   
-               onClick = { () => {this.onDateClick(cloneDay); this.displayDay()}}        
+               onClick = { () => {this.onDateClick(cloneDay); this.displayDayUI()}}        
             >
               <span className='number'>{(formattedDate)}</span>
               {isSameDay(day, selectedDate)? <span className='event-count'>{(this.props.events.length > 0)? this.props.events.length:''}</span>:''}
@@ -123,13 +123,13 @@ class CalendarMain extends React.Component {
   }
 
   renderIcons() {
-    const iconList = Array.from(this.props.icons)
-    let icons = []
+    const iconList = Array.from(this.props.icons);
+    let icons = [];
     for(var i in iconList) {
-      let iconName = iconList[i]
+      let iconName = iconList[i];
       icons.push(
         <span
-          className = "mini-icon material-icons"
+          className = 'mini-icon material-icons'
           value = {iconName}>
           {iconName}
         </span>

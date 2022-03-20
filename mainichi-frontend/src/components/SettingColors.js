@@ -28,7 +28,7 @@ class SettingColors extends React.Component {
           <input type='radio' name='theme' id='dandelion' value='dandelion' onChange={this.props.updateSelectedTheme}></input>
           <label htmlFor='themeA'>Dandelion</label>            
         </div>
-        <input type="submit" value="Submit" className='submit-button'/>
+        <input type='submit' value='Submit' className='submit-button'/>
       </form>
     );
   }

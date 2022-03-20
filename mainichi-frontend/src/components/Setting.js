@@ -21,7 +21,7 @@ class Setting extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://keystone-habit.herokuapp.com/timezones", {
+    fetch('https://keystone-habit.herokuapp.com/timezones', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ class Setting extends React.Component {
   submitSetting = (e) => {
     e.preventDefault();
 
-    const { timezone } = this.state
+    const { timezone } = this.state;
 
     confirmAlert({
       title: 'Confirm to apply',
@@ -94,7 +94,7 @@ class Setting extends React.Component {
 
   updateSelectedTheme(e){
     this.setState({
-      themeSelected: e.currentTarget.value,
+      themeSelected: e.currentTarget.value
     })
   }
 

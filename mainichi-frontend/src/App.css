@@ -399,7 +399,7 @@ main {
 
 @media only screen and (max-width: 790px) {
   .event-count {
-    left: 3.3em;
+    left: 2.8em;
   }
 }
 
@@ -745,12 +745,11 @@ main {
 
 /* HELP */
 
-.less-margin {
-  margin-left: -2em;
+.help li {
   padding-right: 1.4em;
 }
 
-.help-list {
+.help ul {
   margin-top: .2em;
   margin-bottom: .2em;
 }

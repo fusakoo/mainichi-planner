@@ -5,8 +5,8 @@ function Header() {
   return (
     <>
       <header>
-        <div id="logo">
-          <span className="material-icon">event</span>
+        <div id='logo'>
+          <span className='material-icon'>event</span>
           <span>
             Mainichi Planner
           </span>

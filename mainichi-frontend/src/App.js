@@ -8,7 +8,9 @@ import Help from './components/Help';
 import Setting from './components/Setting';
 import ChangeLog from './components/ChangeLog';
 import IconList from './components/IconList';
-import logPath from './CHANGELOG.md';
+
+import logPath from './markdown/changelog.md';
+import qaPath from './markdown/qa.md';
 
 import { Route, Routes } from 'react-router-dom';
 import { addSeconds } from 'date-fns';
@@ -27,13 +29,14 @@ class App extends React.Component {
       iana: localStorage.getItem('iana') || Intl.DateTimeFormat().resolvedOptions().timeZone,
       theme: localStorage.getItem('theme') || 'light',
       dataIsLoaded: false,
-      logs: null
+      logs: null,
+      qaText: null
     };
 
     this.setIana = this.setIana.bind(this);
     this.displayLog = this.displayLog.bind(this);
-    this.displayDay = this.displayDay.bind(this);
-    this.hideDay = this.hideDay.bind(this);
+    this.displayDayUI = this.displayDayUI.bind(this);
+    this.hideDayUI = this.hideDayUI.bind(this);
     this.switchTheme = this.switchTheme.bind(this);
   } 
 
@@ -46,6 +49,7 @@ class App extends React.Component {
     // Load the icon data to database
     if(this.state.dataIsLoaded === false){
       this.loadLogs()
+      this.loadQA()
       this.loadIcons(IconList)
       this.setState({
         dataIsLoaded: !this.state.dataIsLoaded
@@ -53,11 +57,20 @@ class App extends React.Component {
     }
   }
 
+  loadQA() {
+    fetch(qaPath)
+    .then(response => response.text())
+    .then((text) => {
+      this.setState({
+        qaText: text
+      })
+    })
+  }
+
   loadLogs() {
     fetch(logPath)
     .then(response => response.text())
     .then((text) => {
-      console.log(text)
       this.setState({
         logs: text
       })
@@ -89,13 +102,13 @@ class App extends React.Component {
     }));
   }
 
-  displayDay() {
+  displayDayUI() {
     this.setState(() => ({
       showSelectedDate: true,
     }));
   }
 
-  hideDay() {
+  hideDayUI() {
     this.setState(() => ({
       showSelectedDate: false,
     }));
@@ -110,22 +123,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app" data-theme={this.state.theme}>
+      <div className='app' data-theme={this.state.theme}>
         <header>
-          <div id="logo">
-            <span className="material-icon">event</span>
-            <span>
-              Mainichi Planner
-            </span>
+          <div id='logo'>
+            <span className='material-icon'>event</span>
+            <span>Mainichi Planner</span>
           </div>
-          <Navigation hideDay={this.hideDay}/>
+          <Navigation hideDayUI={this.hideDayUI}/>
         </header>
         <main>
-          <Calendar displayDay={this.displayDay} {...this.state}/>
+          <Calendar displayDayUI={this.displayDayUI} {...this.state}/>
           <div>
             <Routes>
               <Route exact path='/' element={<Home logs={this.state.logs}/>}/>
-              <Route path='/help' element={<Help/>}/>
+              <Route path='/help' element={<Help qaText={this.state.qaText}/>}/>
               <Route path='/setting' element={<Setting setIana={this.setIana} currentDateTime={this.state.currentDateTime} switchTheme={this.switchTheme}/>}/>
             </Routes>
           </div>

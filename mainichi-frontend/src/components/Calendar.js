@@ -1,8 +1,7 @@
 import React from 'react';
-import { format, addDays, addMonths, subMonths, startOfWeek, startOfMonth, 
-  endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
+import { format, addMonths, subMonths } from 'date-fns';
 import DayUI from './DayUI';
-import Today from './Today';
+import DayOverview from './DayOverview';
 import CalendarMain from './CalendarMain';
 
 class Calendar extends React.Component {
@@ -25,13 +24,13 @@ class Calendar extends React.Component {
   } 
 
   renderIcons() {
-    const iconList = Array.from(this.state.icons)
-    let icons = []
+    const iconList = Array.from(this.state.icons);
+    let icons = [];
     for(var i in iconList) {
       let iconName = iconList[i]
       icons.push(
         <span
-          className = "mini-icon material-icons"
+          className = 'mini-icon material-icons'
           value = {iconName}>
           {iconName}
         </span>
@@ -100,9 +99,9 @@ class Calendar extends React.Component {
       selectedDate: day,
       date_formatted: format(day, 'yyyy-MM-dd')
     })
-    this.fetchDate(day)
-    this.fetchIcons(day)
-    this.fetchEvents(day)
+    this.fetchDate(day);
+    this.fetchIcons(day);
+    this.fetchEvents(day);
   }
 
   nextMonth = () => {
@@ -119,11 +118,12 @@ class Calendar extends React.Component {
   selectToday = () => {
     this.setState({
       selectedDate: new Date(),
-      date_formatted: format(new Date(), 'yyyy-MM-dd')
+      date_formatted: format(new Date(), 'yyyy-MM-dd'),
+      currentMonth: new Date()
     });
-    this.fetchDate(new Date())
-    this.fetchIcons(new Date())
-    this.fetchEvents(new Date())
+    this.fetchDate(new Date());
+    this.fetchIcons(new Date());
+    this.fetchEvents(new Date());
   }
   
   setImportant() {
@@ -133,7 +133,7 @@ class Calendar extends React.Component {
   }
 
   updateIcons = icon => {
-    var currIcons = this.state.selectedIcons
+    var currIcons = this.state.selectedIcons;
     if (currIcons.has(icon)){
       currIcons.delete(icon)
       this.setState({
@@ -149,21 +149,21 @@ class Calendar extends React.Component {
     }
   }
 
-  displayDay = () => {
-    this.props.displayDay()
+  displayDayUI = () => {
+    this.props.displayDayUI();
   }  
 
   render () {
     return (
       <>
         <div className='calendar-container'>
-          <Today currentDateTime={this.props.currentDateTime} iana={this.props.iana}/>
+          <DayOverview currentDateTime={this.props.currentDateTime} iana={this.props.iana}/>
           <div>
-            <button className='select-today' onClick={() => {this.selectToday(); this.displayDay()}}>Today</button>
+            <button className='select-today' onClick={() => {this.selectToday(); this.displayDayUI()}}>Today</button>
           </div>
-          <CalendarMain displayDay={this.displayDay} onDateClick={this.onDateClick} nextMonth={this.nextMonth} prevMonth={this.prevMonth} startOfWeek={this.props.startOfWeek} {...this.state}/>
+          <CalendarMain displayDayUI={this.displayDayUI} onDateClick={this.onDateClick} nextMonth={this.nextMonth} prevMonth={this.prevMonth} startOfWeek={this.props.startOfWeek} {...this.state}/>
         </div>
-        {this.props.showSelectedDate? <DayUI updateIcons={this.updateIcons} date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} selectedIcons={this.state.selectedIcons} events={this.state.events}/> : ''}
+        {this.props.showSelectedDate? <DayUI updateIcons={this.updateIcons} {...this.state} date={this.state.selectedDate} date_formatted={this.state.date_formatted} note={this.state.note} important={this.state.important} icons={this.state.icons} selectedIcons={this.state.selectedIcons} events={this.state.events}/> : ''}
       </>
     )
   }

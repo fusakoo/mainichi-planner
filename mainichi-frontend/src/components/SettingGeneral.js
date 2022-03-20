@@ -9,7 +9,7 @@ class SettingGeneral extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://keystone-habit.herokuapp.com/timezones", {
+    fetch('https://keystone-habit.herokuapp.com/timezones', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ class SettingGeneral extends React.Component {
           <option value={null}></option>
           {time_options}
         </select>
-        <input type="submit" value="Submit" className='submit-button'/>
+        <input type='submit' value='Submit' className='submit-button'/>
       </form>
     );
   }
