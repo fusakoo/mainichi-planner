@@ -1,6 +1,5 @@
-# Microservice - Icon Depot
-This is a small microservice that uses materials icons metadata that allows user
-to send various requests to the endpoint https://icon-depot.herokuapp.com/
+# Mainichi Planner - Backend
+This is the backend built with node.js, sequelize, and express to run a mysql server.
 
 If you are running this locally, please make sure to run
 `npm install`
@@ -16,4 +15,3 @@ FRONTEND_URL=
 HOST=
 PORT=
 ```
-Endpoints can be tested with Postman as well. Happy coding!
