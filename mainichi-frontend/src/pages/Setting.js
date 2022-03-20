@@ -1,11 +1,13 @@
 import React from 'react';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import SettingColors from '../components/SettingPage/SettingColors';
 import SettingGeneral from '../components/SettingPage/SettingGeneral';
 
 class Setting extends React.Component {
+  /* 
+    Page component for rendering the setting page. 
+    Child components: SettingGeneral, SettingColors
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +18,9 @@ class Setting extends React.Component {
       themeSelected: 'light'
     };
     this.updateSelectedTheme = this.updateSelectedTheme.bind(this);
-    this.submitTheme = this.submitTheme.bind(this);
     this.updateTimezone = this.updateTimezone.bind(this);
+    this.setIana = this.setIana.bind(this);
+    this.switchTheme = this.switchTheme.bind(this);
   }
 
   componentDidMount() {
@@ -44,54 +47,6 @@ class Setting extends React.Component {
       )
     }
 
-  submitSetting = (e) => {
-    e.preventDefault();
-
-    const { timezone } = this.state;
-
-    confirmAlert({
-      title: 'Confirm to apply',
-      message: 'Would you like to apply the settings?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            alert('Settings applied.');
-            let new_iana = this.state.timezones[timezone]
-            this.props.setIana(new_iana);              
-          }
-        },
-        {
-          label: 'No',
-          onClick: () => alert('Settings not applied.')
-        }
-      ]
-    });
-  };
-
-  submitTheme = (e) => {
-    e.preventDefault();
-
-    confirmAlert({
-      title: 'Confirm to apply',
-      message: 'Would you like to apply the selected theme?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            alert('Theme applied.');
-            let newTheme = this.state.themeSelected
-            this.props.switchTheme(newTheme);
-          }
-        },
-        {
-          label: 'No',
-          onClick: () => alert('Theme not applied.')
-        }
-      ]
-    });
-  }
-
   updateSelectedTheme(e){
     this.setState({
       themeSelected: e.currentTarget.value
@@ -104,6 +59,14 @@ class Setting extends React.Component {
     })
   }
 
+  setIana = newIana => {
+    this.props.setIana(newIana)
+  }
+
+  switchTheme = newTheme => {
+    this.props.switchTheme(newTheme)
+  }
+
   render() {
     return (
       <div className='content'>
@@ -111,13 +74,16 @@ class Setting extends React.Component {
         <div className='text-content'>
           <h2 className='section-header'>General Setting</h2>
           <SettingGeneral 
-            submitSetting={this.submitSetting} 
             updateTimezone={this.updateTimezone}
+            setIana={this.setIana}
+            timezone={this.state.timezone}
+            timezones={this.state.timezones}
           />
           <h2 className='section-header'>Customize Theme</h2>
           <SettingColors 
-            submitTheme={this.submitTheme} 
             updateSelectedTheme={this.updateSelectedTheme}
+            switchTheme={this.switchTheme}
+            themeSelected={this.state.themeSelected}
           />
         </div>
       </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { format, utcToZonedTime } from 'date-fns-tz'
 
-class Today extends React.Component {
+class DayOverview extends React.Component {
+  /* 
+    Component for rendering DayUI's event add/delete section for the day
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -65,4 +68,4 @@ class Today extends React.Component {
   }
 }
 
-export default Today;
+export default DayOverview;

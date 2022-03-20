@@ -3,6 +3,9 @@ import { format, addDays, startOfWeek, startOfMonth,
   endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
 
 class CalendarMain extends React.Component {
+  /* 
+    Component for rendering the actual calendar
+  */
   constructor(props) {
     super(props);
     this.state = {

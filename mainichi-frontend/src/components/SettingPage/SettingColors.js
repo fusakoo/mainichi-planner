@@ -1,15 +1,43 @@
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class SettingColors extends React.Component {
+  /* 
+    Component for rendering Setting page's color (theme) selection
+  */
   constructor(props){
     super(props);
     this.state = {
     }
   }
 
+  submitTheme = (e) => {
+    e.preventDefault();
+
+    confirmAlert({
+      title: 'Confirm to apply',
+      message: 'Would you like to apply the selected theme?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            alert('Theme applied.');
+            let newTheme = this.props.themeSelected
+            this.props.switchTheme(newTheme);
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Theme not applied.')
+        }
+      ]
+    });
+  }
+
   render(){
     return (
-      <form onSubmit={this.props.submitTheme}>
+      <form onSubmit={this.submitTheme}>
         <label className='subsec-header'>Colors</label>
         <span className='footnote'>Select the theme color you'd like to apply.</span>
         <div className='radio-button'>

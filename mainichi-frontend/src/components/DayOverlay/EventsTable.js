@@ -1,6 +1,9 @@
 import React from 'react';
 
 class EventsTable extends React.Component {
+  /* 
+    Component for rendering DayEvents section's table for events for the day
+  */
   constructor(props) {
     super(props);
     this.state = { 

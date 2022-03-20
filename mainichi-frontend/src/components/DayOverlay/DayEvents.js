@@ -2,6 +2,10 @@ import React from 'react';
 import EventsTable from './EventsTable';
 
 class DayEvents extends React.Component {
+  /* 
+    Component for rendering DayUI's event add/delete section for the day
+    Child components: EventsTable
+  */
   constructor(props) {
     super(props);
     this.state = {

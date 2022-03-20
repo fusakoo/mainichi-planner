@@ -1,3 +1,4 @@
+// Component to store the list of icons that is used by the web app
 const iconList = [
     'sentiment_satisfied',
     'sentiment_very_satisfied',

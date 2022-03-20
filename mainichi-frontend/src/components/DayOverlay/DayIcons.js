@@ -3,6 +3,9 @@ import React from 'react';
 import IconList from '../IconList';
 
 class DayIcons extends React.Component {
+  /* 
+    Component for rendering DayUI's icon add/delete section for the day
+  */
   constructor(props) {
     super(props);
     this.state = {

@@ -2,6 +2,10 @@ import React from 'react';
 import Navigation from './Navigation';
 
 class Header extends React.Component {
+  /* 
+    Component for rendering the web app's header
+    Child components: Navigation
+  */
   constructor(props){
     super(props);
     this.state = {

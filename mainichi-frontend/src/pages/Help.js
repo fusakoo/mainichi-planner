@@ -4,6 +4,10 @@ import ReactMarkdown from 'react-markdown'
 import day_image from '../images/dayUI_screenshot.png';
 
 class Help extends React.Component {
+  /* 
+    Page component for rendering the help page of the web app. Uses pre-loaded 
+    markdown files to render the Q&A and feedback sections using react-markdown
+  */
   constructor(props){
     super(props);
     this.state = {

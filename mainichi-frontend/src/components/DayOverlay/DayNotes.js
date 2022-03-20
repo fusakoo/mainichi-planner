@@ -1,6 +1,9 @@
 import React from 'react';
 
 class DayNotes extends React.Component {
+  /* 
+    Component for rendering DayUI's note update section for the day
+  */
   constructor(props) {
     super(props);
     this.state = {

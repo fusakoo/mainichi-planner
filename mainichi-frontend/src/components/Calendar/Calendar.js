@@ -5,6 +5,10 @@ import DayOverview from '../DayOverlay/DayOverview';
 import CalendarMain from './CalendarMain';
 
 class Calendar extends React.Component {
+  /* 
+    Component for rendering calendar related components
+    Child components: DayOverview, CalendarMain, DayUI
+  */
   constructor(props) {
     super(props);
     this.state = {

@@ -4,6 +4,10 @@ import { FaGithub } from 'react-icons/fa';
 import ChangeLog from './ChangeLog';
 
 class Footer extends React.Component {
+  /* 
+    Component for rendering the web app's footer
+    Child components: ChangeLog (triggers if the user clicks on the link)
+  */
   constructor(props){
     super(props);
     this.state = {

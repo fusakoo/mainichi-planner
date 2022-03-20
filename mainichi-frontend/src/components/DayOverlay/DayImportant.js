@@ -1,6 +1,9 @@
 import React from 'react';
 
 class DayImportant extends React.Component {
+  /* 
+    Component for rendering DayUI's importance selection section for the day
+  */
   constructor(props) {
     super(props);
     this.state = {

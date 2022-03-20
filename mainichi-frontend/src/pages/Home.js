@@ -2,6 +2,10 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown'
 
 class Home extends React.Component {
+  /* 
+    Page component for rendering the home page. Uses pre-loaded markdown file to 
+    render the change logs using react-markdown 
+  */
   constructor(props){
     super(props);
     this.state = {

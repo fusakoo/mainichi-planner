@@ -2,6 +2,9 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown'
 
 class Changelog extends React.Component {
+  /* 
+    Component for rendering the ChangeLog overlay for the web
+  */
   constructor(props){
     super(props);
     this.state = {

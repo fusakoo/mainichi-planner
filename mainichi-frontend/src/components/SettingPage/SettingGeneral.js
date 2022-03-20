@@ -1,6 +1,11 @@
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class SettingGeneral extends React.Component {
+  /* 
+    Component for rendering Setting page's general setting options
+  */
   constructor(props){
     super(props);
     this.state = {
@@ -32,6 +37,31 @@ class SettingGeneral extends React.Component {
       )
     }
 
+  submitSetting = (e) => {
+    e.preventDefault();
+
+    const timezone = this.props.timezone;
+
+    confirmAlert({
+      title: 'Confirm to apply',
+      message: 'Would you like to apply the settings?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            alert('Settings applied.');
+            let new_iana = this.props.timezones[timezone]
+            this.props.setIana(new_iana);              
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Settings not applied.')
+        }
+      ]
+    });
+  };
+
   render(){
     const time_options = [];
     for (const[key] of Object.entries(this.state.timezones)) {
@@ -39,7 +69,7 @@ class SettingGeneral extends React.Component {
     }
 
     return (
-      <form onSubmit={this.props.submitSetting}>
+      <form onSubmit={this.submitSetting}>
         <span className='footnote'>Select the options you'd like to make the change.</span>
         <label className='subsec-header'>Timezone </label>
         <span className='footnote'>Select a timezone to change the displayed time (and greeting).</span>

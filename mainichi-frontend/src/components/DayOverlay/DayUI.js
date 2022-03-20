@@ -7,6 +7,10 @@ import DayImportant from './DayImportant';
 import DayNotes from './DayNotes';
 
 class DayUI extends React.Component {
+  /* 
+    Component for rendering the actual DayUI (overlay for the selected day)
+    Child components: DayImportant, DayIcons, DayEvents, DayNotes
+  */
   constructor(props) {
     super(props);
     this.state = {

@@ -19,6 +19,12 @@ import { Route, Routes } from 'react-router-dom';
 import { addSeconds } from 'date-fns';
 
 class App extends React.Component {
+  /* 
+    Main React app. Handles the rendering and also loads (fetches) any data that 
+    is needed by the web app and stores it to its state.
+    Child components: Header, Calendar, Footer
+    Routes (renders depending on the url endpoint): Home, Help, Setting
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +39,6 @@ class App extends React.Component {
       qaText: null,
       feedbackText: null
     };
-
     this.setIana = this.setIana.bind(this);
     this.displayLog = this.displayLog.bind(this);
     this.displayDayUI = this.displayDayUI.bind(this);
@@ -42,12 +47,13 @@ class App extends React.Component {
   } 
 
   componentDidMount() {
+    // Updates the clock each second
     setInterval(() => {
       this.setState({
         currentDateTime : addSeconds(this.state.currentDateTime, 1)
       })
     }, 1000)
-    // Load the icon data to database
+    // Load various data to state, and limit the loading to once
     if(this.state.dataIsLoaded === false){
       this.loadLogs()
       this.loadQA()
