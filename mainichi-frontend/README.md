@@ -1,14 +1,13 @@
-# Mainichi Planner
-
-This is an individual portfolio project created as part of CS361 - Software Engineering I course at Oregon State University.
-
+# Mainichi Planner - Frontend
+This is the frontend of the app built with React.
 
 ## Note
 If you'd like to run this app locally, you'd need to create `.env` file in the same directory as this README.md with the following information.
 ```
 REACT_APP_BACKEND_URL=
 ```
-Where `REACT_APP_BACKEND_URL` equal to the backend API server's endpoint (e.g., `http://localhost...`)
+Where `REACT_APP_BACKEND_URL` equal to the backend API server's endpoint (e.g., `http://localhost...`).
+It would be best to run the backend with `npm start` then run this frontend with the same command in this current directory.
 
 ---
 ## Packages
