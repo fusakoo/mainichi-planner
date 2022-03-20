@@ -2,7 +2,7 @@
 ### Mar 18, 2022
 V2 release of the app. Calendar feature is backed by MySQL database and icons, events, and notes can be now added.
 
-Various themese can be now selected from the Setting page as well. Enjoy!
+Various themes can be now selected from the Setting page as well. Enjoy!
 - MySQL backed calendar database now live. Select a date to add icons, events, and notes.
 - Help page has been additionally updated to reflect the latest state of the web app.
 - In Setting, themes can now be selected. Theme is applied throughout the session.
