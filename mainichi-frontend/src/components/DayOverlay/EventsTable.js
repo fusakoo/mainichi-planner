@@ -1,4 +1,5 @@
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 
 class EventsTable extends React.Component {
   /* 
@@ -12,24 +13,39 @@ class EventsTable extends React.Component {
   }
 
   HandleDelete = (eventName,date) => {
-    fetch( process.env.REACT_APP_BACKEND_URL + '/api/event/' , {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        eventName: eventName, 
-        date: date
-      })
-    }).then(response => response.text())
-    .then(data => {
-      if (alert('Successfully deleted the event.')) {
-      } else {
-        window.location.reload();
-      }
-    })
-    .catch(error => {
-      alert(error);
+    confirmAlert({
+      title: 'Confirm to apply',
+      message: 'Would you like to delete the selected event?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            fetch( process.env.REACT_APP_BACKEND_URL + '/api/event/' , {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                eventName: eventName, 
+                date: date
+              })
+            }).then(response => response.text())
+            .then(data => {
+              if (alert('Event deleted.')) {
+              } else {
+                window.location.reload();
+              }
+            })
+            .catch(error => {
+              alert(error);
+            });             
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Action has been cancelled.')
+        }
+      ]
     });
   }
 
