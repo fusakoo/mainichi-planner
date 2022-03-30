@@ -1,3 +1,11 @@
+## V2.1.0
+### Mar 30, 2022
+Few tweaks made for usability improvement.
+
+- Delete button for Events now have a confirmation dialogue similarly to the ones in Settings page.
+- Current/default timezone is displayed in the dropdown instead of an empty entry.
+---
+
 ## V2.0.0
 ### Mar 18, 2022
 V2 release of the app. Calendar feature is backed by MySQL database and icons, events, and notes can be now added.
