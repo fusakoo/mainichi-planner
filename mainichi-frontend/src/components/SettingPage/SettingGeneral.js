@@ -62,6 +62,10 @@ class SettingGeneral extends React.Component {
     });
   };
 
+  getKeyByValue(set, value) {
+    return Object.keys(set).find(key => set[key] === value);
+  }
+
   render(){
     const time_options = [];
     for (const[key] of Object.entries(this.state.timezones)) {
@@ -76,7 +80,7 @@ class SettingGeneral extends React.Component {
         <select 
           id='timezone' 
           name='timezone' 
-          defaultValue='gmt-8' 
+          value={this.getKeyByValue(this.state.timezones, this.props.iana)}
           onChange={this.props.updateTimezone}
         >
           <option value={null}></option>

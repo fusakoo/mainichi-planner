@@ -76,6 +76,7 @@ class Setting extends React.Component {
           <SettingGeneral 
             updateTimezone={this.updateTimezone}
             setIana={this.setIana}
+            iana={this.props.iana}
             timezone={this.state.timezone}
             timezones={this.state.timezones}
           />

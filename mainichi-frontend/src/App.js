@@ -166,9 +166,14 @@ class App extends React.Component {
               />
               <Route 
                 path='/setting' 
-                element={<Setting setIana={this.setIana} 
-                currentDateTime={this.state.currentDateTime} 
-                switchTheme={this.switchTheme}/>}
+                element={
+                  <Setting 
+                    setIana={this.setIana} 
+                    iana={this.state.iana}
+                    currentDateTime={this.state.currentDateTime} 
+                    switchTheme={this.switchTheme}
+                  />
+                }
               />
             </Routes>
           </div>
